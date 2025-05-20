@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# misc
+
+.idea
+.DS_Store2 add
