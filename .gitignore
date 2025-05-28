@@ -176,4 +176,6 @@ cython_debug/
 # misc
 
 .idea
-.DS_Store2 add
+.DS_Store
+
+accelerator_source_cedar/tests/test_resources/temp_dirs

@@ -21,9 +21,9 @@ template_prefix = "https%3A%2F%2Frepo.metadatacenter.org%2Ftemplate-instances%2F
 
 class CedarAccess(object):
 
-    def __init__(self, cedar_file_name=None):
-        self.cedar_file_name = cedar_file_name
-        self.cedar_config = CedarConfig(cedar_file_name)
+    def __init__(self, params=None):
+
+        self.cedar_config = CedarConfig(params)
 
     def retrieve_folder_contents(self, folder_id):
         """
@@ -80,7 +80,7 @@ class CedarAccess(object):
         return r_json
 
 
-    def retrieve_resource(self, resource_id):
+    def retrieve_resource(self, resource_id) -> dict:
 
         """
         Retrieve the resource as a json-ld document

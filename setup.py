@@ -19,4 +19,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.9",
+    package_data={"accelerator_source_cedar": ["accel_cedar/templates/*.jinja", "accel_cedar/resources/*"]},
+    include_package_data=True,
 )
