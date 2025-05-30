@@ -1,15 +1,13 @@
 import json
 import logging
-import traceback
 import uuid
 import warnings
 
-from pcor_cedar.cedar_resource_reader import CedarResourceReader
-from pcor_ingest.pcor_intermediate_model import PcorIntermediateProjectModel, \
-    PcorIntermediateResourceModel, PcorIntermediateProgramModel, \
-    PcorSubmissionInfoModel, PcorGeospatialDataResourceModel, \
-    PcorPopDataResourceModel, PcorGeoToolModel, PcorKeyDatasetModel
-from pcor_ingest.pcor_template_parser import PcorTemplateParser
+from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
+    PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel, \
+    PcorGeospatialDataResourceModel, PcorGeoToolModel, PcorPopDataResourceModel, PcorKeyDatasetModel
+from accelerator_source_cedar.accel_cedar.cedar_resource_reader import CedarResourceReader
+from accelerator_source_cedar.accel_cedar.template_parser import PcorTemplateParser
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -20,6 +18,7 @@ logger = logging.getLogger(__name__)
 """
 Reader of CEDAR template data for version 1_5_1
 """
+
 
 class CedarResourceReader_1_5_1(CedarResourceReader):
     """
@@ -42,7 +41,10 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         warnings.simplefilter(action='ignore', category=UserWarning)
         with open(template_absolute_path, 'r') as f:
             contents_json = json.loads(f.read())
+            result.model_data = self.model_from_json(contents_json)
 
+    def model_from_json(self, contents_json: dict) -> dict:
+        model_data = {}
         is_key_dataset = "KEY DATASETS DATA_151" in contents_json
 
         submission_key = "SUBMITTER"
@@ -55,7 +57,6 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         population_key = "POPULATION DATA RESORCE"
         key_dataset_key = "KEY DATASETS DATA_151"
 
-
         if is_key_dataset:
             submission_key = "SUBMITTER_151"
             program_key = "PROGRAM_151"
@@ -63,86 +64,57 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             resource_key = "RESOURCE_151"
             data_resource_key = "KD_DATA RESOURCE_151"
 
-
         logger.info("submission phase")
-        try:
-            submission = CedarResourceReader_1_5_1.extract_submission_data(contents_json, key=submission_key)
-            submission.submit_location = template_absolute_path
-            result.model_data["submission"] = submission
-        except Exception as err:
-            logger.error("exception parsing submission: %s" % str(err))
-            result.success = False
-            result.errors.append("error parsing submission: %s" % str(err))
-            result.traceback = traceback.format_exc()
-            result.message = str(err)
-            return
+        submission = CedarResourceReader_1_5_1.extract_submission_data(contents_json, key=submission_key)
+        model_data["submission"] = submission
 
         logger.info("program phase")
 
-        try:
-
-            program = self.extract_program_data(contents_json, key=program_key)
-            result.model_data["program"] = program
-            result.program_name = program.name
-
-        except Exception as err:
-            logger.error("exception parsing program: %s" % str(err))
-            result.success = False
-            result.errors.append("error parsing program: %s" % str(err))
-            result.traceback = traceback.format_exc()
-            result.message = str(err)
-            return
+        program = self.extract_program_data(contents_json, key=program_key)
+        model_data["program"] = program
+        program_name = program.name
 
         logger.info("project phase")
 
-        try:
-            project = CedarResourceReader_1_5_1.extract_project_data(contents_json, key=project_key)
-            result.model_data["project"] = project
-            result.project_guid = project.submitter_id
-            result.project_code = project.code
-        except Exception as err:
-            logger.error("exception parsing project: %s" % str(err))
-            result.success = False
-            result.errors.append("error parsing project: %s" % str(err))
-            result.message = str(err)
-            result.traceback = traceback.format_exc()
-            return
-
-        result.project_name = result.model_data["project"].name
+        project = CedarResourceReader_1_5_1.extract_project_data(contents_json, key=project_key)
+        model_data["project"] = project
+        project_guid = project.submitter_id
+        project_code = project.code
 
         logger.info("resource phase")
 
-        try:
-            resource = CedarResourceReader_1_5_1.extract_resource_data(contents_json, key=resource_key)
-            result.model_data["resource"] = resource
-            result.resource_guid = resource.submitter_id
-            result.resource_name = resource.name
-        except Exception as err:
-            logger.error("exception parsing resource: %s" % str(err))
-            result.success = False
-            result.errors.append("error parsing resource: %s" % str(err))
-            result.message = str(err)
-            result.traceback = traceback.format_exc()
+        resource = CedarResourceReader_1_5_1.extract_resource_data(contents_json, key=resource_key)
+        model_data["resource"] = resource
 
         # based on type extract the detailed resource information
 
         if "GEOEXPOSURE DATA" in contents_json:
             logger.info("geoexposure phase")
-            geoexposure_data = CedarResourceReader_1_5_1.extract_geoexposure_data(contents_json, data_resource_key=data_resource_key, key=geoexposure_key)
-            result.model_data["geospatial_data_resource"] = geoexposure_data
+            geoexposure_data = CedarResourceReader_1_5_1.extract_geoexposure_data(contents_json,
+                                                                                  data_resource_key=data_resource_key,
+                                                                                  key=geoexposure_key)
+            model_data["geospatial_data_resource"] = geoexposure_data
         elif "POPULATION DATA RESORCE" in contents_json:
             logger.info("population data phase")
-            population_data = CedarResourceReader_1_5_1.extract_population_data(contents_json, data_resource_key=data_resource_key, key=population_key)
-            result.model_data["population_data_resource"] = population_data
+            population_data = CedarResourceReader_1_5_1.extract_population_data(contents_json,
+                                                                                data_resource_key=data_resource_key,
+                                                                                key=population_key)
+            model_data["population_data_resource"] = population_data
         elif "TOOL RESOURCE" in contents_json:
             logger.info("geo tool phase")
-            tool_data = CedarResourceReader_1_5_1.extract_geoexposure_tool_data(contents_json, data_resource_key=data_resource_key, key=geoexposure_tool_key)
-            result.model_data["geospatial_tool_resource"] = tool_data
+            tool_data = CedarResourceReader_1_5_1.extract_geoexposure_tool_data(contents_json,
+                                                                                data_resource_key=data_resource_key,
+                                                                                key=geoexposure_tool_key)
+            model_data["geospatial_tool_resource"] = tool_data
         elif "KEY DATASETS DATA_151" in contents_json:
-            key_dataset_data = CedarResourceReader_1_5_1.extract_key_dataset_data(contents_json, data_resource_key=data_resource_key, key=key_dataset_key)
-            result.model_data["key_dataset"] = key_dataset_data
+            key_dataset_data = CedarResourceReader_1_5_1.extract_key_dataset_data(contents_json,
+                                                                                  data_resource_key=data_resource_key,
+                                                                                  key=key_dataset_key)
+            model_data["key_dataset"] = key_dataset_data
         else:
             raise Exception("unknown data type")
+
+        return model_data
 
     @staticmethod
     def extract_program_data(contents_json, key='PROGRAM'):
@@ -153,7 +125,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         """
 
         program = PcorIntermediateProgramModel()
-        program.dbgap_accession_number = contents_json[key]["@id"] # FIXME: add to tpl
+        program.dbgap_accession_number = contents_json[key]["@id"]  # FIXME: add to tpl
         program.name = contents_json[key]["Program_name"]["@value"]
         if program.dbgap_accession_number == "" or program.dbgap_accession_number is None:
             program.dbgap_accession_number = program.name
@@ -195,13 +167,12 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         sponsors_in_json = contents_json[key]["project_sponsor"]
         for sponsor in sponsors_in_json:
             if sponsor["@value"]:
-               project.project_sponsor.append(sponsor["@value"])
+                project.project_sponsor.append(sponsor["@value"])
 
         sponsors_in_json = contents_json[key]["project_sponsor_other"]
         for sponsor in sponsors_in_json:
             if sponsor["@value"]:
                 project.project_sponsor_other.append(sponsor["@value"])
-
 
         sponsor_types = contents_json[key]["project_sponsor_type"]
         for item in sponsor_types:
@@ -276,16 +247,20 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
                 resource.keywords.append(keyword["@value"])
 
         resource.payment_required = PcorTemplateParser.sanitize_boolean(
-                    contents_json[key]["payment_required"]["@value"])
+            contents_json[key]["payment_required"]["@value"])
 
-        resource.resource_reference = PcorTemplateParser.sanitize_column(contents_json[key]["Resource Reference_150"]["resource_reference"]["@value"])
+        resource.resource_reference = PcorTemplateParser.sanitize_column(
+            contents_json[key]["Resource Reference_150"]["resource_reference"]["@value"])
         if contents_json[key]["Resource Reference_150"]["resource_reference_link"]:
-            resource.resource_reference_link = contents_json[key]["Resource Reference_150"]["resource_reference_link"]["@id"]
+            resource.resource_reference_link = contents_json[key]["Resource Reference_150"]["resource_reference_link"][
+                "@id"]
 
-        resource.resource_use_agreement = contents_json[key]["Resource Use Agreement_150"]["resource_use_agreement"]["@value"]
+        resource.resource_use_agreement = contents_json[key]["Resource Use Agreement_150"]["resource_use_agreement"][
+            "@value"]
 
         # pop data can have an empty {}} with no @id:null
-        resource.resource_use_agreement_link = contents_json[key]["Resource Use Agreement_150"]["resource_use_agreement_link"].get("@id")
+        resource.resource_use_agreement_link = contents_json[key]["Resource Use Agreement_150"][
+            "resource_use_agreement_link"].get("@id")
 
         resource.is_static = PcorTemplateParser.sanitize_boolean(contents_json[key]["is_static"]["@value"])
 
@@ -320,7 +295,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
                 geoexposure.source_name.append(item["@value"])
 
         geoexposure.includes_citizen_collected = PcorTemplateParser.sanitize_boolean(
-                contents_json[data_resource_key]["includes_citizen_collected"]["@value"])
+            contents_json[data_resource_key]["includes_citizen_collected"]["@value"])
 
         for update_frequency in contents_json[data_resource_key]["update_frequency"]:
             if update_frequency["@value"]:
@@ -329,10 +304,10 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         geoexposure.update_frequency_other = contents_json[data_resource_key]["update_frequency_other"]["@value"]
 
         geoexposure.has_api = PcorTemplateParser.sanitize_boolean(
-                contents_json[data_resource_key]["has_api"]["@value"])
+            contents_json[data_resource_key]["has_api"]["@value"])
 
         geoexposure.has_visualization_tool = PcorTemplateParser.sanitize_boolean(
-                contents_json[data_resource_key]["has_visualization_tool"]["@value"])
+            contents_json[data_resource_key]["has_visualization_tool"]["@value"])
 
         for measure in contents_json[key]["measures"]:
             if measure["@value"]:
@@ -428,7 +403,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         return geoexposure
 
     @staticmethod
-    def extract_geoexposure_tool_data(contents_json,data_resource_key="DATA_RESOURCE", key="GEOEXPOSURE DATA"):
+    def extract_geoexposure_tool_data(contents_json, data_resource_key="DATA_RESOURCE", key="GEOEXPOSURE DATA"):
         """
         extract the geoexposure tool related information from the cedar resource
         :param contents_json: json-ld from cedar
@@ -484,7 +459,6 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             body["is_open"]["@value"])
 
         geotool.intended_use = body["intended_use"]["@value"]
-
 
         return geotool
 
@@ -659,8 +633,8 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         key_dataset.has_api = PcorTemplateParser.sanitize_boolean(data_resource["has_api"]["@value"])
         key_dataset.has_visualization_tool = PcorTemplateParser.sanitize_boolean(
             data_resource["has_visualization_tool"]["@value"])
-        #key_dataset.comments = data_resource["Comments"]["@value"] # FIXME:  comments left off of key dataset data resource
-        #key_dataset.intended_use = data_resource["intended_use"]["@value"] # FIXME: intended use left off of key dataset data resc
+        # key_dataset.comments = data_resource["Comments"]["@value"] # FIXME:  comments left off of key dataset data resource
+        # key_dataset.intended_use = data_resource["intended_use"]["@value"] # FIXME: intended use left off of key dataset data resc
 
         # Key datasets data
         key_data_json = contents_json[key]
@@ -682,7 +656,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             PcorTemplateParser.format_date_time(key_data_json["time_extent_end"]["@value"]))
         key_dataset.time_available_comment = key_data_json["time_available_comment"]["@value"]
         if key_data_json["temporal_resolution"]["@value"]:
-                key_dataset.temporal_resolution.append(key_data_json["temporal_resolution"]["@value"])
+            key_dataset.temporal_resolution.append(key_data_json["temporal_resolution"]["@value"])
         for item in key_data_json["temporal_resolution_other"]:
             if item["@value"]:
                 key_dataset.temporal_resolution_other.append(item["@value"])
@@ -694,7 +668,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
                 key_dataset.temporal_resolution_all_other_available.append(item["@value"])
         key_dataset.temporal_resolution_comment = key_data_json["temporal_resolution_comment"]["@value"]
         if key_data_json["spatial_resolution"]["@value"]:
-                key_dataset.spatial_resolution.append(key_data_json["spatial_resolution"]["@value"])
+            key_dataset.spatial_resolution.append(key_data_json["spatial_resolution"]["@value"])
         for item in key_data_json["spatial_resolution_other"]:
             if item["@value"]:
                 key_dataset.spatial_resolution_other.append(item["@value"])
@@ -782,7 +756,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
                 key_dataset.use_tools_text.append(item["@value"])
 
         for item in key_data_json["Example Application"]["use_example_application_link"]:
-            if item["@value"]: # FIXME: link uses value not id - mcc
+            if item["@value"]:  # FIXME: link uses value not id - mcc
                 key_dataset.use_example_application_link.append(item["@value"])
         for item in key_data_json["Example Application"]["Use_example_application_text"]:
             if item["@value"]:

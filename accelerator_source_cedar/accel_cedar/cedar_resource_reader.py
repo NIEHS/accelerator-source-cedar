@@ -5,12 +5,15 @@ import uuid
 import warnings
 
 import validators
+from accelerator_core.utils.resource_utils import determine_resource_path
 
 from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
 from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
-    PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel
+    PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel, PcorGeoToolModel, \
+    PcorGeospatialDataResourceModel, PcorPopDataResourceModel, PcorKeyDatasetModel
 from accelerator_source_cedar.accel_cedar.measures_rollup import MeasuresRollup
 from accelerator_source_cedar.accel_cedar.process_result import ProcessResult
+from accelerator_source_cedar.accel_cedar.template_parser import PcorTemplateParser
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -26,8 +29,8 @@ class CedarResourceReader:
     """
 
     def __init__(self):
-        self.cedar_config = CedarConfig()
-        self.pcor_measures_rollup = MeasuresRollup("resources/MeasuresTermsv4.xlsx")
+        #self.cedar_config = CedarConfig()
+        self.pcor_measures_rollup = MeasuresRollup("MeasuresTermsv4.xlsx")
         self.yyyy_pattern = r"\b(\d{4})\b"
 
     def parse(self, cedar_data:dict, cedar_id:str, result:ProcessResult):
