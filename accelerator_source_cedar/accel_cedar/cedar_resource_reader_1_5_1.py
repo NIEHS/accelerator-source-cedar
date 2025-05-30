@@ -34,7 +34,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         logger.info("parse()")
 
         """
-        Parse json in a file at a given absolute path
+        Parse a spreadsheet template for a file at a given absolute path
         :param template_absolute_path: absolute path to the template file
         :param result: PcorTemplateParseResult with the outcome
         """
@@ -96,7 +96,6 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             model_data["geospatial_data_resource"] = geoexposure_data
         elif "POPULATION DATA RESORCE" in contents_json:
             logger.info("population data phase")
-
             population_data = CedarResourceReader_1_5_1.extract_population_data(contents_json,
                                                                                 data_resource_key=data_resource_key,
                                                                                 key=population_key)
@@ -203,12 +202,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         """
 
         resource = PcorIntermediateResourceModel()
-        try:
-            resource.id = contents_json[key]["resource_guid"]["@value"]
-            resource.resource_guid = resource.id
-        except KeyError:
-            pass
-
+        resource.id = contents_json[key]["resource_GUID"]["@value"]
         resource.resource_type = contents_json[key]["resource_type"]["@value"]
         resource.name = contents_json[key]["resource_name"]["@value"]
         resource.short_name = contents_json[key]["resource_short_name"]["@value"]
@@ -238,6 +232,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         resource.created_datetime = contents_json["pav:createdOn"]
         resource.updated_datetime = contents_json["pav:lastUpdatedOn"]
 
+        resource.verification_datetime = contents_json[key]["date_verified"]["@value"]
         resource.verification_datetime = contents_json[key]["date_verified"]["@value"]
 
         for publication_citation in contents_json[key]["Publication"]["publication_citation"]:
@@ -269,7 +264,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
 
         resource.is_static = PcorTemplateParser.sanitize_boolean(contents_json[key]["is_static"]["@value"])
 
-        resource.resource_version = contents_json[key]["resource_version"]["@value"]
+        resource.resource_version = resource.verification_datetime = contents_json[key]["resource_version"]["@value"]
 
         if resource.id is None:
             resource.id = str(uuid.uuid4())
@@ -377,10 +372,6 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             if model_method["@value"]:
                 geoexposure.model_methods.append(model_method["@value"])
 
-        for model_method in contents_json[key]["model_methods_other"]:
-            if model_method["@value"]:
-                geoexposure.model_methods_other.append(model_method["@value"])
-
         for geometry_type in contents_json[key]["geometry_type"]:
             if geometry_type["@value"]:
                 geoexposure.geometry_type.append(geometry_type["@value"])
@@ -404,14 +395,10 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         for item in contents_json[key]["Data Download"]["data_location_text"]:
             if item["@value"]:
                 geoexposure.data_location_text.append(item["@value"])
-            else:
-                geoexposure.data_location_text.append("")
 
         for item in contents_json[key]["Data Download"]["data_link"]:
             if '@id' in item and item["@id"]:
                 geoexposure.data_link.append(item["@id"])
-            else:
-                geoexposure.data_link.append("")
 
         return geoexposure
 
@@ -476,7 +463,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         return geotool
 
     @staticmethod
-    def extract_population_data(contents_json, data_resource_key="DATA RESOURCE", key="POPULATION DATA RESORCE"):
+    def extract_population_data(contents_json, data_resource_key="DATA_RESOURCE", key="POPULATION DATA RESORCE"):
         """
         extract the population related information from the cedar resource
         :param contents_json: json-ld from cedar
@@ -731,13 +718,9 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         for item in key_data_json["Data Download"]["data_location_text"]:
             if item["@value"]:
                 key_dataset.data_location_text.append(item["@value"])
-            else:
-                key_dataset.data_location_text.append("")
         for item in key_data_json["Data Download"]["data_link"]:
             if '@id' in item and item["@id"]:
                 key_dataset.data_link.append(item["@id"])
-            else:
-                key_dataset.data_link.append("")
         for item in key_data_json["license_type"]:
             if item["@value"]:
                 key_dataset.license_type.append(item["@value"])
