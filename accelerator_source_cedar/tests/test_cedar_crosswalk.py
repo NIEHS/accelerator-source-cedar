@@ -24,7 +24,9 @@ class TestAccelCrosswalk(unittest.TestCase):
         xcom_utils = XcomUtils(xcom_props_resolver)
 
         ingest_source_descriptor = IngestSourceDescriptor()
+        ingest_source_descriptor.ingest_identifier = "test"
         ingest_payload = IngestPayload(ingest_source_descriptor)
+
         ingest_payload.payload_inline = False
 
         with open("test_resources/key_dataset1.json", 'r') as f:
