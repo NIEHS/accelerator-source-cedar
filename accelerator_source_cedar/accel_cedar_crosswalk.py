@@ -40,7 +40,7 @@ class CedarToAccelCrosswalk(Crosswalk):
         for i in range(payload_len):
             payload = self.payload_resolve(ingest_result, i)
             transformed = self.translate_to_accel_model(ingest_result, payload)
-            self.report_individual(output_payload, transformed)
+            self.report_individual(output_payload, "itemid", transformed)
 
         return output_payload
 
@@ -86,7 +86,6 @@ class CedarToAccelCrosswalk(Crosswalk):
         # TODO: add other items
 
         technical = TechnicalMetadataModel()
-        technical.original_source_link = ingest_result.ingest_source_descriptor.source_metadata_reference_link
         technical.original_source = ingest_result.ingest_source_descriptor.ingest_type
         technical.created = ingest_result.ingest_source_descriptor.submit_date
 
