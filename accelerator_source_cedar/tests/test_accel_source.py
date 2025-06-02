@@ -55,11 +55,15 @@ class TestCedarAccelSource(unittest.TestCase):
 
         xcom_props_resolver = DirectXcomPropsResolver(temp_files_supported=True, temp_files_location=temp_dirs_path)
 
-        ingestSourceDescriptor = IngestSourceDescriptor()
-        ingestPayload = IngestPayload(ingestSourceDescriptor)
-        ingestPayload.payload_inline = False
+        ingest_source_descriptor = IngestSourceDescriptor()
+        ingest_source_descriptor.ingest_identifier = runid
+        ingest_source_descriptor.ingest_item_id=item_id
 
-        cedar_accel_source = CedarAccelSource(ingestSourceDescriptor, xcom_props_resolver)
+        ingest_payload = IngestPayload(ingest_source_descriptor)
+
+        ingest_payload.payload_inline = False
+
+        cedar_accel_source = CedarAccelSource(ingest_source_descriptor, xcom_props_resolver)
 
         params = { 'api_key': self.__class__.api_key, 'run_id': runid }
 
