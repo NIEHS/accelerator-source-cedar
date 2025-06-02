@@ -177,5 +177,5 @@ cython_debug/
 
 .idea
 .DS_Store
-
+~*
 accelerator_source_cedar/tests/test_resources/temp_dirs
