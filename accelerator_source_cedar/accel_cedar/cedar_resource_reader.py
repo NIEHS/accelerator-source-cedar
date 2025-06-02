@@ -4,6 +4,7 @@ import logging
 import traceback
 import uuid
 
+import importlib.resources as pkg_resources
 import validators
 
 from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
@@ -28,7 +29,9 @@ class CedarResourceReader:
 
     def __init__(self):
         #self.cedar_config = CedarConfig()
-        self.pcor_measures_rollup = MeasuresRollup("MeasuresTermsv4.xlsx")
+        resources_path = pkg_resources.files("accelerator_source_cedar.accel_cedar") / 'resources'
+        measures_file = resources_path.joinpath("MeasuresTermsv4.xlsx")
+        self.pcor_measures_rollup = MeasuresRollup(measures_file)
         self.yyyy_pattern = r"\b(\d{4})\b"
 
     def parse(self, cedar_data:dict, cedar_id:str, result:ProcessResult):

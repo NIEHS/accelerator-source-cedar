@@ -56,7 +56,7 @@ class CedarToAccelCrosswalk(Crosswalk):
 
         submission = SubmissionInfoModel()
         submission.submitter_name = ingest_result.ingest_source_descriptor.submitter_name
-        submission.submit_date = int(ingest_result.ingest_source_descriptor.submit_date)
+        #submission.submit_date = int(ingest_result.ingest_source_descriptor.submit_date)
         # Author info
 
         program = AccelProgramModel()
@@ -69,8 +69,8 @@ class CedarToAccelCrosswalk(Crosswalk):
         project.project_sponsor = cedar_model["project"].project_sponsor
         project.project_sponsor_other = cedar_model["project"].project_sponsor_other
         project.project_sponsor_type = cedar_model["project"].project_sponsor_type
-        project.project_type = cedar_model["project"].project_type_other
-        project.project_type_other = cedar_model["project"].project_url
+        #project.project_type = cedar_model["project"].project_type_other
+        #project.project_type_other = cedar_model["project"].project_url
 
         resource = AccelIntermediateResourceModel()
         resource.name = cedar_model["resource"].name
