@@ -39,6 +39,7 @@ class CedarToAccelCrosswalk(Crosswalk):
         payload_len = self.get_payload_length(ingest_result)
         for i in range(payload_len):
             payload = self.payload_resolve(ingest_result, i)
+            logger.debug(f"payload is resolved: {payload}")
             transformed = self.translate_to_accel_model(ingest_result, payload)
             self.report_individual(output_payload, "itemid", transformed)
 
@@ -52,7 +53,7 @@ class CedarToAccelCrosswalk(Crosswalk):
 
         cedar_reader = CedarResourceReader_1_5_1()
         cedar_model = cedar_reader.model_from_json(payload)
-
+        logger.info("have cedar_model")
 
         submission = SubmissionInfoModel()
         submission.submitter_name = ingest_result.ingest_source_descriptor.submitter_name
