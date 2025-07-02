@@ -59,7 +59,6 @@ class CedarToAccelCrosswalk(Crosswalk):
         submission = SubmissionInfoModel()
         submission.submitter_name = ingest_result.ingest_source_descriptor.submitter_name
         submission.submitter_email = ingest_result.ingest_source_descriptor.submitter_email
-        submission.submit_date = int(ingest_result.ingest_source_descriptor.submit_date)
         # Author info
 
         program = AccelProgramModel()
