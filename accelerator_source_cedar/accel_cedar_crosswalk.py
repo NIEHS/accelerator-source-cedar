@@ -42,7 +42,7 @@ class CedarToAccelCrosswalk(Crosswalk):
             payload = self.payload_resolve(ingest_result, i)
             logger.info(f"payload is resolved: {payload}")
             transformed = self.translate_to_accel_model(ingest_result, payload)
-            self.report_individual(output_payload, "itemid", transformed)
+            self.report_individual(output_payload, ingest_result.ingest_source_descriptor.ingest_item_id, transformed)
 
         return output_payload
 
