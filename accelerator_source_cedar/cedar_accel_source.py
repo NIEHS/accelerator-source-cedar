@@ -64,7 +64,6 @@ class CedarAccelSource(AccelIngestComponent):
         logger.debug(f"cedar json returned\n{json_dict}")
 
         ingestPayload = IngestPayload(self.ingest_source_descriptor)
-        ingestPayload.payload_inline = False
         self.report_individual(ingestPayload, identifier, json_dict)
         ingestPayload.ingest_successful = True
         return ingestPayload

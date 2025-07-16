@@ -9,11 +9,8 @@ import math
 import pandas as pd
 import validators
 
-from pcor_ingest.measures_rollup import PcorMeasuresRollup
-from pcor_ingest.pcor_gen3_ingest import PcorGen3Ingest
-from pcor_ingest.pcor_intermediate_model import PcorIntermediateProjectModel, \
-    PcorIntermediateResourceModel, PcorIntermediateProgramModel, \
-    PcorSubmissionInfoModel
+from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
+    PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -29,9 +26,6 @@ class PcorTemplateParser:
     """
 
     def __init__(self, pcor_ingest_configuration):
-        self.pcor_ingest_configuration = pcor_ingest_configuration
-        self.pcor_ingest = PcorGen3Ingest(pcor_ingest_configuration)
-        self.pcor_measures_rollup = PcorMeasuresRollup(self.pcor_ingest_configuration.measures_rollup)
         self.yyyy_pattern = r"\b(\d{4})\b"
 
     def parse(self, template_absolute_path, result):

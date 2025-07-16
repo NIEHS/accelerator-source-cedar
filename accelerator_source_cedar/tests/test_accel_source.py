@@ -72,7 +72,7 @@ class TestCedarAccelSource(unittest.TestCase):
 
         actual = cedar_accel_source.ingest_single(json_path, params)
         self.assertTrue(actual.ingest_successful)
-        self.assertTrue(len(actual.payload_path) == 1)
+        self.assertTrue(len(actual.payload) == 1)
 
 
 
