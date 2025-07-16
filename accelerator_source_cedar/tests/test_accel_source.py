@@ -13,8 +13,8 @@ class TestCedarAccelSource(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.api_key = os.environ["CEDAR_API_KEY"]
-        cls.item_id = os.environ["CEDAR_ITEM_ID"]
+        cls.api_key = "hithere" #os.environ["CEDAR_API_KEY"]
+        cls.item_id = "hey" #os.environ["CEDAR_ITEM_ID"]
         pass
 
     @classmethod
@@ -44,11 +44,13 @@ class TestCedarAccelSource(unittest.TestCase):
         self.assertTrue(actual.ingest_successful)
         self.assertTrue(len(actual.payload) == 1)
 
-    def test_ingest_single_file(self):
+    def test_ingest_key_dataset(self):
         temp_dirs_path = "test_resources/temp_dirs"
         runid = "test_ingest_single"
         item_id = self.__class__.item_id
         path = os.path.join(temp_dirs_path, runid)
+
+        json_path = os.path.join("test_resources", "key_dataset1.json")
 
         if os.path.exists(path):
             shutil.rmtree(path)
@@ -56,14 +58,19 @@ class TestCedarAccelSource(unittest.TestCase):
         xcom_props_resolver = DirectXcomPropsResolver(temp_files_supported=True, temp_files_location=temp_dirs_path)
 
         ingestSourceDescriptor = IngestSourceDescriptor()
+        ingestSourceDescriptor.ingest_type = "cedar"
+        ingestSourceDescriptor.ingest_item_id = item_id
+        ingestSourceDescriptor.ingest_identifier = runid
+        ingestSourceDescriptor.submitter_name = "My Name"
+        ingestSourceDescriptor.submitter_email = "email@email.com"
         ingestPayload = IngestPayload(ingestSourceDescriptor)
         ingestPayload.payload_inline = False
 
         cedar_accel_source = CedarAccelSource(ingestSourceDescriptor, xcom_props_resolver)
 
-        params = { 'api_key': self.__class__.api_key, 'run_id': runid }
+        params = { 'api_key': self.__class__.api_key, 'run_id': runid, 'FILE': True }
 
-        actual = cedar_accel_source.ingest_single(item_id, params)
+        actual = cedar_accel_source.ingest_single(json_path, params)
         self.assertTrue(actual.ingest_successful)
         self.assertTrue(len(actual.payload_path) == 1)
 
