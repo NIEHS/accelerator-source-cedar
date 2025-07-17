@@ -21,29 +21,6 @@ class TestCedarAccelSource(unittest.TestCase):
     def tearDownClass(cls):
         pass
 
-    def xtest_ingest_single_inline(self):
-        temp_dirs_path = "test_resources/temp_dirs"
-        runid = "test_ingest_single"
-        item_id = self.__class__.item_id
-        path = os.path.join(temp_dirs_path, runid)
-
-        if os.path.exists(path):
-            shutil.rmtree(path)
-
-        xcom_props_resolver = DirectXcomPropsResolver(temp_files_supported=True, temp_files_location=temp_dirs_path)
-
-        ingestSourceDescriptor = IngestSourceDescriptor()
-        ingestPayload = IngestPayload(ingestSourceDescriptor)
-        ingestPayload.payload_inline = True
-
-        cedar_accel_source = CedarAccelSource(ingestSourceDescriptor, xcom_props_resolver)
-
-        params = { 'api_key': self.__class__.api_key, 'run_id': runid }
-
-        actual = cedar_accel_source.ingest_single(item_id, params)
-        self.assertTrue(actual.ingest_successful)
-        self.assertTrue(len(actual.payload) == 1)
-
     def test_ingest_key_dataset(self):
         temp_dirs_path = "test_resources/temp_dirs"
         runid = "test_ingest_single"
@@ -73,7 +50,6 @@ class TestCedarAccelSource(unittest.TestCase):
         actual = cedar_accel_source.ingest_single(json_path, params)
         self.assertTrue(actual.ingest_successful)
         self.assertTrue(len(actual.payload) == 1)
-
 
 
 if __name__ == '__main__':

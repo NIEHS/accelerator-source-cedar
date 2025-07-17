@@ -143,7 +143,7 @@
       "Resource Use Agreement_150": "https://schema.metadatacenter.org/properties/de892817-974c-4e6e-9cf8-c82d5c53d71a",
       "resource_version": "https://schema.metadatacenter.org/properties/ff394466-be17-43d0-8a96-0734a14c9fa2"
     },
-    "resource_GUID": {
+    "resource_guid": {
       "@value": null
     },
     "resource_name": {
@@ -258,10 +258,10 @@
         "resource_reference_link": "https://schema.metadatacenter.org/properties/1803de62-237c-4d4a-9df7-ba81c0f59326"
       },
       "resource_reference": {
-        "@value": ""
+        "@value": "This is a resoure reference"
       },
       "resource_reference_link": {
-        "@id": ""
+        "@id": "https://resource.reference.org/a_link"
       },
       "@id": "https://repo.metadatacenter.org/template-element-instances/4547bc65-e977-4a10-a021-a3b6e7193e59"
     },
