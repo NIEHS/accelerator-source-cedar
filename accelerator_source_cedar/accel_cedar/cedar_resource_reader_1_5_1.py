@@ -202,7 +202,11 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         """
 
         resource = PcorIntermediateResourceModel()
-        resource.id = contents_json[key]["resource_guid"]["@value"]
+        try:
+            resource.id = contents_json[key]["resource_guid"]["@value"]
+        except KeyError:
+            pass
+        
         resource.resource_type = contents_json[key]["resource_type"]["@value"]
         resource.name = contents_json[key]["resource_name"]["@value"]
         resource.short_name = contents_json[key]["resource_short_name"]["@value"]
