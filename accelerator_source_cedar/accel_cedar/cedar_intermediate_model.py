@@ -376,7 +376,7 @@ class PcorKeyDatasetModel:
 
     def __init__(self):
         # data resc props are common
-        self.comments = ""
+        self.comments = "" #d
         self.display_type = ""
         self.has_api = False
         self.has_visualization_tool = False
@@ -430,11 +430,9 @@ class PcorKeyDatasetModel:
         self.time_extent_end_yyyy = None
         self.time_extent_start_yyyy = None
         self.updated_datetime = ""
-        self.use_suggested = [] # TODO: should we collapse into intended use in resc? MC
-        self.use_key_variables = []
+        self.use_suggested = []
         self.use_suggested_other = []
-        self.use_strengths = []
-        self.use_limitations = []
+        self.use_key_variables = []
         self.use_example_application_link = []
         self.use_example_application_text = []
         self.use_tool_link = []

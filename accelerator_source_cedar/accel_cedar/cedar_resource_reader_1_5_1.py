@@ -202,13 +202,14 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         """
 
         resource = PcorIntermediateResourceModel()
-        resource.id = contents_json[key]["resource_GUID"]["@value"]
+        resource.id = contents_json[key]["resource_guid"]["@value"]
         resource.resource_type = contents_json[key]["resource_type"]["@value"]
         resource.name = contents_json[key]["resource_name"]["@value"]
         resource.short_name = contents_json[key]["resource_short_name"]["@value"]
 
         resource.resource_url = contents_json[key]["resource_url"]["@id"]
         resource.description = contents_json[key]["resource_description"]["@value"]
+        resource.resource_guid = contents_json[key]["resource_guid"]["@value"]
 
         for domain in contents_json[key]["domain"]:
             if domain["@value"]:
@@ -232,7 +233,6 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         resource.created_datetime = contents_json["pav:createdOn"]
         resource.updated_datetime = contents_json["pav:lastUpdatedOn"]
 
-        resource.verification_datetime = contents_json[key]["date_verified"]["@value"]
         resource.verification_datetime = contents_json[key]["date_verified"]["@value"]
 
         for publication_citation in contents_json[key]["Publication"]["publication_citation"]:
@@ -264,7 +264,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
 
         resource.is_static = PcorTemplateParser.sanitize_boolean(contents_json[key]["is_static"]["@value"])
 
-        resource.resource_version = resource.verification_datetime = contents_json[key]["resource_version"]["@value"]
+        resource.resource_version = contents_json[key]["resource_version"]["@value"]
 
         if resource.id is None:
             resource.id = str(uuid.uuid4())
@@ -395,10 +395,14 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         for item in contents_json[key]["Data Download"]["data_location_text"]:
             if item["@value"]:
                 geoexposure.data_location_text.append(item["@value"])
+            else:
+                geoexposure.data_location_text.append("")
 
         for item in contents_json[key]["Data Download"]["data_link"]:
             if '@id' in item and item["@id"]:
                 geoexposure.data_link.append(item["@id"])
+            else:
+                geoexposure.data_link.append("")
 
         return geoexposure
 
@@ -718,9 +722,13 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         for item in key_data_json["Data Download"]["data_location_text"]:
             if item["@value"]:
                 key_dataset.data_location_text.append(item["@value"])
+            else:
+                key_dataset.data_location_text.append("")
         for item in key_data_json["Data Download"]["data_link"]:
             if '@id' in item and item["@id"]:
                 key_dataset.data_link.append(item["@id"])
+            else:
+                key_dataset.data_link.append("")
         for item in key_data_json["license_type"]:
             if item["@value"]:
                 key_dataset.license_type.append(item["@value"])

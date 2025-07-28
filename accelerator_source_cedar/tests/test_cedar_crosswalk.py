@@ -11,6 +11,17 @@ from accelerator_source_cedar.accel_cedar_crosswalk import CedarToAccelCrosswalk
 
 
 class TestAccelCrosswalk(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.api_key = "hithere" #os.environ["CEDAR_API_KEY"]
+        cls.item_id = "hey" #os.environ["CEDAR_ITEM_ID"]
+        pass
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
     def test_crosswalk_key_dataset_via_temp_file(self):
         temp_dirs_path = "test_resources/temp_dirs"
         runid = "test_crosswalk_key_dataset"
@@ -25,6 +36,11 @@ class TestAccelCrosswalk(unittest.TestCase):
 
         ingest_source_descriptor = IngestSourceDescriptor()
         ingest_source_descriptor.ingest_identifier = "test"
+        ingest_source_descriptor.ingest_item_id = item_id
+        ingest_source_descriptor.ingest_identifier = runid
+        ingest_source_descriptor.submitter_name = "submitter name"
+        ingest_source_descriptor.submitter_email = "submitter@email"
+        ingest_source_descriptor.schema_version = "1.0.1"
         ingest_payload = IngestPayload(ingest_source_descriptor)
 
         ingest_payload.payload_inline = False
