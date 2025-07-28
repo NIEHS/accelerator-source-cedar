@@ -12,9 +12,7 @@ from accelerator_core.workflow.accel_source_ingest import (
     IngestPayload,
 )
 from accelerator_core.workflow.crosswalk import Crosswalk
-from sqlalchemy.util import inspect_getfullargspec
 
-from accelerator_dataverse.dataverse_utils.dataverse_types import Publication
 from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_1 import CedarResourceReader_1_5_1
 
 logger = setup_logger("accelerator-source-cedar")
