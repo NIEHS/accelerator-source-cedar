@@ -376,6 +376,10 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             if model_method["@value"]:
                 geoexposure.model_methods.append(model_method["@value"])
 
+        for model_method in contents_json[key]["model_methods_other"]:
+            if model_method["@value"]:
+                geoexposure.model_methods_other.append(model_method["@value"])
+
         for geometry_type in contents_json[key]["geometry_type"]:
             if geometry_type["@value"]:
                 geoexposure.geometry_type.append(geometry_type["@value"])

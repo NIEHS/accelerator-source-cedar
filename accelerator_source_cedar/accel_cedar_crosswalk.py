@@ -120,7 +120,6 @@ class CedarToAccelCrosswalk(Crosswalk):
 
         # resource reference and reference link should be 1:1
 
-
         resource_references = []
 
         if cedar_model["resource"].resource_reference or cedar_model["resource"].resource_reference_link:
@@ -179,203 +178,13 @@ class CedarToAccelCrosswalk(Crosswalk):
         # differential processing based on data type
 
         if cedar_model.get("key_dataset", None) is not None:
-            logger.info("key dataset")
-
-            data_resource_model = AccelDataResourceModel()
-            data_resource_model.has_api = cedar_model["key_dataset"].has_api
-
-            measures = []
-
-            for measure in cedar_model["key_dataset"].measures:
-                measure_item = OtherType(measure)
-                measures.append(measure_item)
-
-            for measure in cedar_model["key_dataset"].measures_other:
-                measure_item = OtherType(measure, True)
-                measures.append(measure_item)
-
-            data_resource_model.measures = measures
-
-            for exposure_media in cedar_model["key_dataset"].exposure_media:
-                data_resource_model.exposure_media.append(exposure_media)
-
-            measurement_methods = []
-            for method in cedar_model["key_dataset"].measurement_method:
-                measurement_method_item = OtherType(method)
-                measurement_methods.append(measurement_method_item)
-
-            for method in cedar_model["key_dataset"].measurement_method_other:
-                measurement_method_item = OtherType(method, True)
-                measurement_methods.append(measurement_method_item)
-
-            data_resource_model.measurement_methods = measurement_methods
-
-            data_resource_model.time_extent_start = cedar_model["key_dataset"].time_extent_start_yyyy
-            data_resource_model.time_extent_end = cedar_model["key_dataset"].time_extent_end_yyyy
-
-            data_resource_model.key_variables = cedar_model["key_dataset"].use_key_variables
-
-            # temporal data
-
-            accel_temporal_data_model = AccelTemporalDataModel()
-
-            temp_resolution = []
-
-            for item in cedar_model["key_dataset"].temporal_resolution:
-                temp_res = OtherType(item)
-                temp_resolution.append(temp_res)
-
-            for item in cedar_model["key_dataset"].temporal_resolution_other:
-                temp_res = OtherType(item, True)
-                temp_resolution.append(temp_res)
-
-
-            accel_temporal_data_model.temporal_resolution = temp_resolution
-            accel_temporal_data_model.temporal_resolution_comment = cedar_model["key_dataset"].temporal_resolution_comment
-
-            # spatial data
-            accel_geospatial_data = AccelGeospatialDataModel()
-
-            spatial_resolution = []
-
-            temp_res = OtherType(cedar_model["key_dataset"].spatial_resolution)
-            spatial_resolution.append(temp_res)
-
-            for tempval in cedar_model["key_dataset"].spatial_resolution_other:
-                temp_res = OtherType(tempval, True)
-                spatial_resolution.append(temp_res)
-
-            accel_geospatial_data.spatial_resolution = spatial_resolution
-
-            spatial_coverage = []
-
-            for coverage in cedar_model["key_dataset"].spatial_coverage:
-                spatial_coverage_item = OtherType(coverage)
-                spatial_coverage.append(spatial_coverage_item)
-
-            for coverage in cedar_model["key_dataset"].spatial_coverage_other:
-                spatial_coverage_item = OtherType(coverage, True)
-                spatial_coverage.append(spatial_coverage_item)
-
-            accel_geospatial_data.spatial_coverage = spatial_coverage
-            accel_geospatial_data.spatial_resolution_comment = cedar_model["key_dataset"].spatial_resolution_comment
-
-            accel_geospatial_data.spatial_bounding_box = cedar_model["key_dataset"].spatial_bounding_box
-            accel_geospatial_data.geometry_type = cedar_model["key_dataset"].geometry_type
-            accel_geospatial_data.geometry_source = cedar_model["key_dataset"].geometry_source
-
-            geometry_source = []
-            for item in cedar_model["key_dataset"].geometry_source:
-                geometry_source_item = OtherType(item)
-                geometry_source.append(geometry_source_item)
-
-            for item in cedar_model["key_dataset"].geometry_source_other:
-                geometry_source_item = OtherType(item, True)
-                geometry_source.append(geometry_source_item)
-
-
-            accel_geospatial_data.geometry_source = geometry_source
-
-            geographic_feature = []
-
-            for item in cedar_model["key_dataset"].geographic_feature:
-                geographic_feature_item = OtherType(item)
-                geographic_feature.append(geographic_feature_item)
-
-            for item in cedar_model["key_dataset"].geographic_feature_other:
-                geographic_feature_item = OtherType(item, True)
-                geographic_feature.append(geographic_feature_item)
-
-            accel_geospatial_data.geographic_feature = geographic_feature
-
-            model_methods = []
-            for item in cedar_model["key_dataset"].model_methods:
-                model_method_item = OtherType(item)
-                model_methods.append(model_method_item)
-
-            for item in cedar_model["key_dataset"].model_methods_other:
-                model_method_item = OtherType(item, True)
-                model_methods.append(model_method_item)
-
-            accel_geospatial_data.model_methods = model_methods
-
-            data_resource_model.time_available_comment = cedar_model["key_dataset"].time_available_comment
-            data_resource_model.data_formats = cedar_model["key_dataset"].data_formats
-
-            data_resource_model.example_metrics = cedar_model["key_dataset"].use_example_metrics
-            data_resource_model.includes_citizen_collected = cedar_model["key_dataset"].includes_citizen_collected
-
-            for update_frequency in cedar_model["key_dataset"].update_frequency:
-                data_resource_model.update_frequency.append(update_frequency)
-
-            # data location, data link, must be 1:1
-            len_loc = len(cedar_model["key_dataset"].data_location_text)
-            len_data_link = len(cedar_model["key_dataset"].data_link)
-
-            if len_loc != len_data_link:
-                logger.warning("mismatch in data location:link length, ignoring")
-            else:
-                data_locations = []
-                for i in range(len_loc):
-                    data_location_item = AccelDataLocationModel()
-                    data_location_item.value = cedar_model["key_dataset"].data_location_text[i]
-                    data_location_item.data_location_link = cedar_model["key_dataset"].data_link[i]
-                    data_locations.append(data_location_item)
-
-                data_resource_model.data_location = data_locations
-
-            # data usage
-
-            data_usage = AccelDataUsageModel()
-            data_usage.suggested_audience = cedar_model["key_dataset"].suggested_audience
-            data_usage.strengths = cedar_model["key_dataset"].use_strengths
-            data_usage.limitations = cedar_model["key_dataset"].use_limitations
-
-            suggested_use = []
-
-            for item in cedar_model["key_dataset"].use_suggested:
-                suggested_item = OtherType(item, False)
-                suggested_use.append(suggested_item)
-
-            for item in cedar_model["key_dataset"].use_suggested_other:
-                suggested_item = OtherType(item, True)
-                suggested_use.append(suggested_item)
-
-            data_usage.intended_use = suggested_use
-
-            # computational tool
-            computational_tool = AccelComputationalWorkflow()
-
-            # use tool link and text
-            len_tool = len(cedar_model["key_dataset"].use_tools_text)
-            len_tool_link = len(cedar_model["key_dataset"].use_tool_link)
-
-            if len_tool != len_tool_link:
-                logger.warning("mismatch in use tool:link length, ignoring")
-            else:
-                use_tools = []
-                for i in range(len_tool):
-                    use_tool_item = AccelDataLocationModel()
-                    use_tool_item.value = cedar_model["key_dataset"].use_tools_text[i]
-                    use_tool_item.data_location_link = cedar_model["key_dataset"].use_tool_link[i]
-
-                computational_tool.use_tools = use_tools
-
-                # example app link and text
-                len_tool = len(cedar_model["key_dataset"].use_example_application_text)
-                len_tool_link = len(cedar_model["key_dataset"].use_example_application_link)
-
-                if len_tool != len_tool_link:
-                    logger.warning("mismatch in example app text:link length, ignoring")
-                else:
-                    example_apps = []
-                    for i in range(len_tool):
-                        use_tool_item = AccelDataLocationModel()
-                        use_tool_item.value = cedar_model["key_dataset"].use_example_application_text[i]
-                        use_tool_item.data_location_link = cedar_model["key_dataset"].use_example_application_link[i]
-
-                    computational_tool.example_application = example_apps
-
+            accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage = self.process_key_dataset(
+                cedar_model)
+        elif cedar_model.get("geospatial_data_resource") is not None:
+            accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage = self.process_geospatial(
+                cedar_model)
+        else:
+            raise Exception("unable to process cedar type")
 
         technical = TechnicalMetadataModel()
         technical.original_source = ingest_result.ingest_source_descriptor.ingest_type
@@ -398,4 +207,281 @@ class CedarToAccelCrosswalk(Crosswalk):
         )
 
         return rendered
+
+    def process_key_dataset(self, cedar_model):
+        logger.info("key dataset")
+        data_resource_model = AccelDataResourceModel()
+        data_resource_model.has_api = cedar_model["key_dataset"].has_api
+        measures = []
+        for measure in cedar_model["key_dataset"].measures:
+            measure_item = OtherType(measure)
+            measures.append(measure_item)
+        for measure in cedar_model["key_dataset"].measures_other:
+            measure_item = OtherType(measure, True)
+            measures.append(measure_item)
+        data_resource_model.measures = measures
+        for exposure_media in cedar_model["key_dataset"].exposure_media:
+            data_resource_model.exposure_media.append(exposure_media)
+        measurement_methods = []
+        for method in cedar_model["key_dataset"].measurement_method:
+            measurement_method_item = OtherType(method)
+            measurement_methods.append(measurement_method_item)
+        for method in cedar_model["key_dataset"].measurement_method_other:
+            measurement_method_item = OtherType(method, True)
+            measurement_methods.append(measurement_method_item)
+        data_resource_model.measurement_methods = measurement_methods
+        data_resource_model.time_extent_start = cedar_model["key_dataset"].time_extent_start_yyyy
+        data_resource_model.time_extent_end = cedar_model["key_dataset"].time_extent_end_yyyy
+        data_resource_model.key_variables = cedar_model["key_dataset"].use_key_variables
+        # temporal data
+        accel_temporal_data_model = AccelTemporalDataModel()
+        temp_resolution = []
+        for item in cedar_model["key_dataset"].temporal_resolution:
+            temp_res = OtherType(item)
+            temp_resolution.append(temp_res)
+        for item in cedar_model["key_dataset"].temporal_resolution_other:
+            temp_res = OtherType(item, True)
+            temp_resolution.append(temp_res)
+        accel_temporal_data_model.temporal_resolution = temp_resolution
+        accel_temporal_data_model.temporal_resolution_comment = cedar_model["key_dataset"].temporal_resolution_comment
+        # spatial data
+        accel_geospatial_data = AccelGeospatialDataModel()
+        spatial_resolution = []
+        temp_res = OtherType(cedar_model["key_dataset"].spatial_resolution)
+        spatial_resolution.append(temp_res)
+        for tempval in cedar_model["key_dataset"].spatial_resolution_other:
+            temp_res = OtherType(tempval, True)
+            spatial_resolution.append(temp_res)
+        accel_geospatial_data.spatial_resolution = spatial_resolution
+        spatial_coverage = []
+        for coverage in cedar_model["key_dataset"].spatial_coverage:
+            spatial_coverage_item = OtherType(coverage)
+            spatial_coverage.append(spatial_coverage_item)
+        for coverage in cedar_model["key_dataset"].spatial_coverage_other:
+            spatial_coverage_item = OtherType(coverage, True)
+            spatial_coverage.append(spatial_coverage_item)
+        accel_geospatial_data.spatial_coverage = spatial_coverage
+        accel_geospatial_data.spatial_resolution_comment = cedar_model["key_dataset"].spatial_resolution_comment
+        accel_geospatial_data.spatial_bounding_box = cedar_model["key_dataset"].spatial_bounding_box
+        accel_geospatial_data.geometry_type = cedar_model["key_dataset"].geometry_type
+        accel_geospatial_data.geometry_source = cedar_model["key_dataset"].geometry_source
+        geometry_source = []
+        for item in cedar_model["key_dataset"].geometry_source:
+            geometry_source_item = OtherType(item)
+            geometry_source.append(geometry_source_item)
+        for item in cedar_model["key_dataset"].geometry_source_other:
+            geometry_source_item = OtherType(item, True)
+            geometry_source.append(geometry_source_item)
+        accel_geospatial_data.geometry_source = geometry_source
+        geographic_feature = []
+        for item in cedar_model["key_dataset"].geographic_feature:
+            geographic_feature_item = OtherType(item)
+            geographic_feature.append(geographic_feature_item)
+        for item in cedar_model["key_dataset"].geographic_feature_other:
+            geographic_feature_item = OtherType(item, True)
+            geographic_feature.append(geographic_feature_item)
+        accel_geospatial_data.geographic_feature = geographic_feature
+        model_methods = []
+        for item in cedar_model["key_dataset"].model_methods:
+            model_method_item = OtherType(item)
+            model_methods.append(model_method_item)
+        for item in cedar_model["key_dataset"].model_methods_other:
+            model_method_item = OtherType(item, True)
+            model_methods.append(model_method_item)
+        accel_geospatial_data.model_methods = model_methods
+        data_resource_model.time_available_comment = cedar_model["key_dataset"].time_available_comment
+        data_resource_model.data_formats = cedar_model["key_dataset"].data_formats
+        data_resource_model.example_metrics = cedar_model["key_dataset"].use_example_metrics
+        data_resource_model.includes_citizen_collected = cedar_model["key_dataset"].includes_citizen_collected
+        for update_frequency in cedar_model["key_dataset"].update_frequency:
+            data_resource_model.update_frequency.append(update_frequency)
+        # data location, data link, must be 1:1
+        len_loc = len(cedar_model["key_dataset"].data_location_text)
+        len_data_link = len(cedar_model["key_dataset"].data_link)
+        if len_loc != len_data_link:
+            logger.warning("mismatch in data location:link length, ignoring")
+        else:
+            data_locations = []
+            for i in range(len_loc):
+                data_location_item = AccelDataLocationModel()
+                data_location_item.value = cedar_model["key_dataset"].data_location_text[i]
+                data_location_item.data_location_link = cedar_model["key_dataset"].data_link[i]
+                data_locations.append(data_location_item)
+
+            data_resource_model.data_location = data_locations
+        # data usage
+        data_usage = AccelDataUsageModel()
+        data_usage.suggested_audience = cedar_model["key_dataset"].suggested_audience
+        data_usage.strengths = cedar_model["key_dataset"].use_strengths
+        data_usage.limitations = cedar_model["key_dataset"].use_limitations
+        suggested_use = []
+        for item in cedar_model["key_dataset"].use_suggested:
+            suggested_item = OtherType(item, False)
+            suggested_use.append(suggested_item)
+        for item in cedar_model["key_dataset"].use_suggested_other:
+            suggested_item = OtherType(item, True)
+            suggested_use.append(suggested_item)
+        data_usage.intended_use = suggested_use
+        # computational tool
+        computational_tool = AccelComputationalWorkflow()
+        # use tool link and text
+        len_tool = len(cedar_model["key_dataset"].use_tools_text)
+        len_tool_link = len(cedar_model["key_dataset"].use_tool_link)
+        if len_tool != len_tool_link:
+            logger.warning("mismatch in use tool:link length, ignoring")
+        else:
+            use_tools = []
+            for i in range(len_tool):
+                use_tool_item = AccelDataLocationModel()
+                use_tool_item.value = cedar_model["key_dataset"].use_tools_text[i]
+                use_tool_item.data_location_link = cedar_model["key_dataset"].use_tool_link[i]
+
+            computational_tool.use_tools = use_tools
+
+            # example app link and text
+            len_tool = len(cedar_model["key_dataset"].use_example_application_text)
+            len_tool_link = len(cedar_model["key_dataset"].use_example_application_link)
+
+            if len_tool != len_tool_link:
+                logger.warning("mismatch in example app text:link length, ignoring")
+            else:
+                example_apps = []
+                for i in range(len_tool):
+                    use_tool_item = AccelDataLocationModel()
+                    use_tool_item.value = cedar_model["key_dataset"].use_example_application_text[i]
+                    use_tool_item.data_location_link = cedar_model["key_dataset"].use_example_application_link[i]
+
+                computational_tool.example_application = example_apps
+        return accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage
+
+
+    def process_geospatial(self, cedar_model):
+        logger.info("process_geospatial")
+        data_resource_model = AccelDataResourceModel()
+        geospatial_cedar_data = cedar_model["geospatial_data_resource"]
+        data_resource_model.has_api = geospatial_cedar_data.has_api
+        measures = []
+        for measure in geospatial_cedar_data.measures:
+            measure_item = OtherType(measure)
+            measures.append(measure_item)
+        for measure in geospatial_cedar_data.measures_other:
+            measure_item = OtherType(measure, True)
+            measures.append(measure_item)
+        data_resource_model.measures = measures
+        for exposure_media in geospatial_cedar_data.exposure_media:
+            data_resource_model.exposure_media.append(exposure_media)
+
+        measurement_methods = []
+
+        for method in geospatial_cedar_data.measurement_method:
+            measurement_method_item = OtherType(method)
+            measurement_methods.append(measurement_method_item)
+        for method in geospatial_cedar_data.measurement_method_other:
+            measurement_method_item = OtherType(method, True)
+            measurement_methods.append(measurement_method_item)
+
+        data_resource_model.measurement_method = measurement_methods
+        data_resource_model.time_extent_start = geospatial_cedar_data.time_extent_start_yyyy
+        data_resource_model.time_extent_end = geospatial_cedar_data.time_extent_end_yyyy
+
+        # no use_key_variables
+        # temporal data
+        accel_temporal_data_model = AccelTemporalDataModel()
+        temp_resolution = []
+        for item in geospatial_cedar_data.temporal_resolution:
+            temp_res = OtherType(item)
+            temp_resolution.append(temp_res)
+        for item in geospatial_cedar_data.temporal_resolution_other:
+            temp_res = OtherType(item, True)
+            temp_resolution.append(temp_res)
+        accel_temporal_data_model.temporal_resolution = temp_resolution
+
+        # spatial data
+        accel_geospatial_data = AccelGeospatialDataModel()
+        spatial_resolution = []
+
+        for item in geospatial_cedar_data.spatial_resolution:
+            spatial_resolution.append(OtherType(item))
+
+        for item in geospatial_cedar_data.spatial_resolution_other:
+            spatial_resolution.append(OtherType(item, True))
+
+        accel_geospatial_data.spatial_resolution = spatial_resolution
+
+        spatial_coverage = []
+        for coverage in geospatial_cedar_data.spatial_coverage:
+            spatial_coverage_item = OtherType(coverage)
+            spatial_coverage.append(spatial_coverage_item)
+        for coverage in geospatial_cedar_data.spatial_coverage_other:
+            spatial_coverage_item = OtherType(coverage, True)
+
+        accel_geospatial_data.spatial_coverage = spatial_coverage
+
+        # accel_geospatial_data.spatial_resolution_comment
+        accel_geospatial_data.spatial_bounding_box = geospatial_cedar_data.spatial_bounding_box
+        accel_geospatial_data.geometry_type = geospatial_cedar_data.geometry_type
+        geometry_source = []
+        for item in geospatial_cedar_data.geometry_source:
+            geometry_source_item = OtherType(item)
+            geometry_source.append(geometry_source_item)
+        for item in geospatial_cedar_data.geometry_source_other:
+            geometry_source_item = OtherType(item, True)
+            geometry_source.append(geometry_source_item)
+        accel_geospatial_data.geometry_source = geometry_source
+        geographic_feature = []
+        for item in geospatial_cedar_data.geographic_feature:
+            geographic_feature_item = OtherType(item)
+            geographic_feature.append(geographic_feature_item)
+        for item in geospatial_cedar_data.geographic_feature_other:
+            geographic_feature_item = OtherType(item, True)
+            geographic_feature.append(geographic_feature_item)
+        accel_geospatial_data.geographic_feature = geographic_feature
+        model_methods = []
+        for item in geospatial_cedar_data.model_methods:
+            model_method_item = OtherType(item)
+            model_methods.append(model_method_item)
+        for item in geospatial_cedar_data.model_methods_other:
+            model_method_item = OtherType(item, True)
+            model_methods.append(model_method_item)
+        accel_geospatial_data.model_methods = model_methods
+
+        data_resource_model.time_available_comment = geospatial_cedar_data.time_available_comment
+
+        data_resource_model.data_formats = geospatial_cedar_data.data_formats
+        #data_resource_model.example_metrics
+        data_resource_model.includes_citizen_collected = geospatial_cedar_data.includes_citizen_collected
+        # right now update frequency other is being dropped
+        for update_frequency in geospatial_cedar_data.update_frequency:
+            data_resource_model.update_frequency.append(update_frequency)
+        # data location, data link, must be 1:1
+        len_loc = len(geospatial_cedar_data.data_location_text)
+        len_data_link = len(geospatial_cedar_data.data_link)
+        if len_loc != len_data_link:
+            logger.warning("mismatch in data location:link length, ignoring")
+        else:
+            data_locations = []
+            for i in range(len_loc):
+                data_location_item = AccelDataLocationModel()
+                data_location_item.data_location_text = geospatial_cedar_data.data_location_text[i]
+                data_location_item.data_location_link = geospatial_cedar_data.data_link[i]
+                data_locations.append(data_location_item)
+
+            data_resource_model.data_location = data_locations
+        # data usage
+        data_usage = AccelDataUsageModel()
+        #data_usage.suggested_audience
+
+        # some items are pulled down from resource
+
+        resource = cedar_model["resource"]
+
+        data_usage.strengths = resource.strengths
+        data_usage.limitations = resource.limitations
+
+        # data_usage.intended_use
+
+        # computational tool
+        computational_tool = AccelComputationalWorkflow()
+
+        return accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage
 
