@@ -344,9 +344,9 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             if temporal_resolution["@value"]:
                 geoexposure.temporal_resolution_other.append(temporal_resolution["@value"])
 
-        for spatial_resolution in contents_json[key]["spatial_resolution"]:
-            if spatial_resolution["@value"]:
-                geoexposure.spatial_resolution.append(spatial_resolution["@value"])
+            val = contents_json[key]["spatial_resolution"]["@value"]
+            if val:
+                geoexposure.spatial_resolution.append(val)
 
         for spatial_resolution in contents_json[key]["spatial_resolution_other"]:
             if spatial_resolution["@value"]:
