@@ -247,8 +247,9 @@ class CedarToAccelCrosswalk(Crosswalk):
         # spatial data
         accel_geospatial_data = AccelGeospatialDataModel()
         spatial_resolution = []
-        temp_res = OtherType(cedar_model["key_dataset"].spatial_resolution)
-        spatial_resolution.append(temp_res)
+        for item in cedar_model["key_dataset"].spatial_resolution:
+            temp_res = OtherType(item)
+            spatial_resolution.append(temp_res)
         for tempval in cedar_model["key_dataset"].spatial_resolution_other:
             temp_res = OtherType(tempval, True)
             spatial_resolution.append(temp_res)
