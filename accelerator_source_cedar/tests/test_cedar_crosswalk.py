@@ -40,7 +40,7 @@ class TestAccelCrosswalk(unittest.TestCase):
         ingest_source_descriptor.ingest_identifier = runid
         ingest_source_descriptor.submitter_name = "submitter name"
         ingest_source_descriptor.submitter_email = "submitter@email"
-        ingest_source_descriptor.schema_version = "1.0.1"
+        ingest_source_descriptor.schema_version = "1.0.2"
         ingest_payload = IngestPayload(ingest_source_descriptor)
 
         ingest_payload.payload_inline = False
@@ -67,7 +67,7 @@ class TestAccelCrosswalk(unittest.TestCase):
         ingest_source_descriptor.ingest_identifier = runid
         ingest_source_descriptor.submitter_name = "submitter name"
         ingest_source_descriptor.submitter_email = "submitter@email"
-        ingest_source_descriptor.schema_version = "1.0.1"
+        ingest_source_descriptor.schema_version = "1.0.2"
         ingest_payload = IngestPayload(ingest_source_descriptor)
 
         ingest_payload.payload_inline = True

@@ -193,7 +193,7 @@ class CedarToAccelCrosswalk(Crosswalk):
         technical.original_source_identifier = ingest_result.ingest_source_descriptor.ingest_item_id
 
         rendered = build_accel_from_model(
-            version="1.0.1",
+            version="1.0.2",
             submission=submission,
             data_resource=data_resource_model,
             temporal=accel_temporal_data_model,
