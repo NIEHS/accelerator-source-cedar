@@ -34,7 +34,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         logger.info("parse()")
 
         """
-        Parse a spreadsheet template for a file at a given absolute path
+        Parse json in a file at a given absolute path
         :param template_absolute_path: absolute path to the template file
         :param result: PcorTemplateParseResult with the outcome
         """
