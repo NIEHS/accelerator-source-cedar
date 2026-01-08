@@ -3,7 +3,8 @@ from abc import ABC, abstractmethod
 from accelerator_core.schema.models.accel_model import AccelProgramModel, AccelProjectModel, \
     AccelIntermediateResourceModel, build_accel_from_model, ProjectSponsor, OtherType, AccelPublicationModel, \
     AccelResourceUseAgreementModel, AccelResourceReferenceModel, AccelDataResourceModel, AccelTemporalDataModel, \
-    AccelGeospatialDataModel, AccelDataLocationModel, AccelDataUsageModel, AccelComputationalWorkflow
+    AccelGeospatialDataModel, AccelDataLocationModel, AccelDataUsageModel, AccelComputationalWorkflow, \
+    AccelPopulationDataModel
 from accelerator_core.schema.models.base_model import SubmissionInfoModel, TechnicalMetadataModel
 from accelerator_core.utils.logger import setup_logger
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
@@ -183,6 +184,9 @@ class CedarToAccelCrosswalk(Crosswalk):
         elif cedar_model.get("geospatial_data_resource") is not None:
             accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage = self.process_geospatial(
                 cedar_model)
+        elif cedar_model.get("population_data_resource") is not None:
+            accel_population_data, accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage = self.process_population(
+                cedar_model)
         else:
             raise Exception("unable to process cedar type")
 
@@ -322,7 +326,7 @@ class CedarToAccelCrosswalk(Crosswalk):
         for item in cedar_model["key_dataset"].use_suggested_other:
             suggested_item = OtherType(item, True)
             suggested_use.append(suggested_item)
-        data_usage.intended_use = suggested_use
+        data_usage.intended_use.append(suggested_use)
         # computational tool
         computational_tool = AccelComputationalWorkflow()
         # use tool link and text
@@ -485,4 +489,117 @@ class CedarToAccelCrosswalk(Crosswalk):
         computational_tool = AccelComputationalWorkflow()
 
         return accel_geospatial_data, accel_temporal_data_model, data_resource_model, data_usage
+
+    def process_population(self, cedar_model):
+        """
+        Processes the population data from a given CEDAR model, transforming it into various
+        Accel models (population, temporal, data resource, and data usage). This involves extracting,
+        reformatting, and transferring relevant information between the provided model and the
+        Accel-specific formats. Additionally, performs validation and warning logging for mismatches
+        in data location and link lengths.
+
+        :param cedar_model: A dictionary-like structure containing `population_data_resource`
+            and `data_resource` keys, each with specific data needed for transformation.
+            The structure should match the expected CEDAR model format.
+        :type cedar_model: dict
+
+        :return: A tuple containing four objects:
+            - AccelPopulationDataModel: The population data model filled with relevant data.
+            - AccelTemporalDataModel: The temporal data model derived from the CEDAR data.
+            - AccelDataResourceModel: The resource data model with restructured information.
+            - AccelDataUsageModel: The usage model related to the above data.
+        :rtype: tuple
+        """
+        logger.info("process_population")
+        cedar_population_data = cedar_model["population_data_resource"]
+
+        accel_population_data = AccelPopulationDataModel()
+        accel_data_resource_model = AccelDataResourceModel()
+        accel_temporal_data_model = AccelTemporalDataModel()
+        accel_geospatial_data = AccelGeospatialDataModel()
+        accel_data_usage = AccelDataUsageModel()
+
+        for item in cedar_population_data.exposure_media:
+            accel_data_resource_model.exposure_media.append(item)
+
+        measures = []
+        for measure in cedar_population_data.measures:
+            measure_item = OtherType(measure)
+            measures.append(measure_item)
+        for measure in cedar_population_data.measures_other:
+            measure_item = OtherType(measure, True)
+            measures.append(measure_item)
+        accel_data_resource_model.measures = measures
+
+        accel_data_resource_model.has_api = cedar_population_data.has_api
+        accel_data_resource_model.has_visualization_tool = cedar_population_data.has_visualization_tool
+        accel_data_resource_model.includes_citizen_collected = cedar_population_data.includes_citizen_collected
+
+        if cedar_population_data.intended_use:
+            accel_data_usage.intended_use.append(OtherType(cedar_population_data.intended_use))
+
+        # source_name?
+        accel_data_resource_model.update_frequency = cedar_population_data.update_frequency
+
+        if cedar_population_data.update_frequency_other:
+            accel_data_resource_model.update_frequency.append(cedar_population_data.update_frequency_other)
+
+        accel_population_data.biospecimens_from_humans = cedar_population_data.biospecimens
+        accel_population_data.biospecimens_type = cedar_population_data.biospecimens_type
+
+        for item in cedar_population_data.data_formats:
+            accel_data_resource_model.data_formats.append(item)
+
+        accel_data_resource_model.time_extent_start = cedar_population_data.time_extent_start_yyyy
+        accel_data_resource_model.time_extent_end = cedar_population_data.time_extent_end_yyyy
+        accel_data_resource_model.time_available_comment = cedar_population_data.time_available_comment
+        accel_data_resource_model.update_frequency = cedar_population_data.update_frequency
+
+        len_loc = len(cedar_population_data.data_location_text)
+        len_data_link = len(cedar_population_data.data_link)
+
+        if len_loc != len_data_link:
+            logger.warning("mismatch in data location:link length, ignoring")
+        else:
+            data_locations = []
+            for i in range(len_loc):
+                data_location_item = AccelDataLocationModel()
+                data_location_item.value = cedar_population_data.data_location_text.data_location_text[i]
+                data_location_item.data_location_link = cedar_population_data.data_location_text.data_link[i]
+                data_locations.append(data_location_item)
+
+            accel_data_resource_model.data_location = data_locations
+
+        for item in cedar_population_data.geometry_source:
+            accel_geospatial_data.geometry_source.append(OtherType(item))
+
+        for item in cedar_population_data.geometry_source_other:
+            accel_geospatial_data.geometry_source.append(OtherType(item, True))
+
+        accel_geospatial_data.geometry_type = cedar_population_data.geometry_type
+        accel_population_data.individual_level = cedar_population_data.individual_level
+        accel_population_data.linkable_encounters = cedar_population_data.linkable_encounters
+
+        for item in cedar_population_data.population_studied:
+            accel_population_data.population_studies.append(OtherType(item, False))
+
+        for item in cedar_population_data.population_studied_other:
+            accel_population_data.population_studies.append(OtherType(item, True))
+
+        for item in cedar_population_data.spatial_coverage:
+            accel_geospatial_data.spatial_coverage.append(OtherType(item))
+
+        for item in cedar_population_data.spatial_coverage_other:
+            accel_geospatial_data.spatial_coverage.append(OtherType(item, True))
+
+        for item in cedar_population_data.spatial_resolution:
+            accel_geospatial_data.spatial_resolution.append(OtherType(item))
+
+        for item in cedar_population_data.spatial_resolution_other:
+            accel_geospatial_data.spatial_resolution.append(OtherType(item, True))
+
+        accel_data_resource_model.key_variables = cedar_population_data.use_key_variables
+
+        return accel_population_data, accel_geospatial_data, accel_temporal_data_model, accel_data_resource_model, accel_data_usage
+
 
