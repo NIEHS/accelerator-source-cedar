@@ -3,6 +3,7 @@ import logging
 import uuid
 import warnings
 
+from accelerator_core.schema.models.accel_model import AccelPopulationDataModel, AccelDataResourceModel
 from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
     PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel, \
     PcorGeospatialDataResourceModel, PcorGeoToolModel, PcorPopDataResourceModel, PcorKeyDatasetModel
@@ -96,6 +97,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
             model_data["geospatial_data_resource"] = geoexposure_data
         elif "POPULATION DATA RESORCE" in contents_json:
             logger.info("population data phase")
+
             population_data = CedarResourceReader_1_5_1.extract_population_data(contents_json,
                                                                                 data_resource_key=data_resource_key,
                                                                                 key=population_key)
@@ -475,7 +477,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         return geotool
 
     @staticmethod
-    def extract_population_data(contents_json, data_resource_key="DATA_RESOURCE", key="POPULATION DATA RESORCE"):
+    def extract_population_data(contents_json, data_resource_key="DATA RESOURCE", key="POPULATION DATA RESORCE"):
         """
         extract the population related information from the cedar resource
         :param contents_json: json-ld from cedar

@@ -113,6 +113,32 @@ class TestAccelCrosswalk(unittest.TestCase):
         actual = accel_cedar_crosswalk.transform(ingest_payload)
         self.assertIsNotNone(actual)
 
+    def test_crosswalk_population(self):
+        runid = "test_crosswalk_population"
+        item_id = "test_crosswalk_population_item"
+
+        xcom_props_resolver = DirectXcomPropsResolver(temp_files_supported=False, temp_files_location=None)
+        xcom_utils = XcomUtils(xcom_props_resolver)
+
+        ingest_source_descriptor = IngestSourceDescriptor()
+        ingest_source_descriptor.ingest_identifier = "test"
+        ingest_source_descriptor.ingest_item_id = item_id
+        ingest_source_descriptor.ingest_identifier = runid
+        ingest_source_descriptor.submitter_name = "submitter name"
+        ingest_source_descriptor.submitter_email = "submitter@email"
+        ingest_source_descriptor.schema_version = "1.0.2"
+        ingest_payload = IngestPayload(ingest_source_descriptor)
+
+        ingest_payload.payload_inline = True
+
+        with open("test_resources/pop_data.json", 'r') as f:
+            contents_json = json.loads(f.read())
+            ingest_payload.payload.append(contents_json)
+
+        accel_cedar_crosswalk = CedarToAccelCrosswalk(xcom_props_resolver)
+        actual = accel_cedar_crosswalk.transform(ingest_payload)
+        self.assertIsNotNone(actual)
+
 
 if __name__ == '__main__':
     unittest.main()
