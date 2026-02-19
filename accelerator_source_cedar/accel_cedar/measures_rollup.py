@@ -42,7 +42,7 @@ class MeasuresRollup:
 
         """
         logger.info("measures_rollup_as_dataframe")
-        df = pd.read_excel(self.measures_file, sheet_name='ForExport', engine='openpyxl')
+        df = pd.read_excel(self.measures_file, sheet_name='Measures', engine='openpyxl')
         return df
 
     def build_measures_structure(self):

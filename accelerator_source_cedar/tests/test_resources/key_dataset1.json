@@ -1,0 +1,672 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "rdfs:label": {
+      "@type": "xsd:string"
+    },
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:derivedFrom": {
+      "@type": "@id"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "skos:notation": {
+      "@type": "xsd:string"
+    },
+    "SUBMITTER_151": "https://schema.metadatacenter.org/properties/b0ef330c-d358-456f-82cb-ac044055343d",
+    "PROGRAM_151": "https://schema.metadatacenter.org/properties/ffce0d3f-edf3-40ce-b14f-886bc5281dcd",
+    "PROJECT_151": "https://schema.metadatacenter.org/properties/c5bb81ca-f744-4180-a749-5de11eaa25fc",
+    "RESOURCE_151": "https://schema.metadatacenter.org/properties/50b534e5-064d-4c46-908b-c745ce34164e",
+    "KD_DATA RESOURCE_151": "https://schema.metadatacenter.org/properties/a74b5e45-b120-463a-8d47-a6ff9c504b17",
+    "KEY DATASETS DATA_151": "https://schema.metadatacenter.org/properties/c0ddebf3-0ad0-41b8-acb1-cba3c683ff16"
+  },
+  "SUBMITTER_151": {
+    "@context": {
+      "submitter_name": "https://schema.metadatacenter.org/properties/96a4f91e-12ab-4e54-b81d-c2914ef4a68c",
+      "submitter_email": "https://schema.metadatacenter.org/properties/ee4a4a76-80a5-4283-86df-7c4d55f38072",
+      "comment": "https://schema.metadatacenter.org/properties/6d11bd44-02e2-4915-b78d-d4dd1788fef5"
+    },
+    "submitter_name": {
+      "@value": "Clark, Lara"
+    },
+    "submitter_email": {
+      "@value": "lara.clark@nih.gov"
+    },
+    "comment": {
+      "@value": "migrated from spreadsheet /Users/conwaymc/Downloads/CHORDS-key-datasets-list_1.3-catalog-crosswalk.xlsx into CEDAR va pcor_tools. manually reviewed by LPC 2025-02-20."
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/e5d876ef-d946-4a36-b598-2aa1fe4028a1"
+  },
+  "PROGRAM_151": {
+    "@context": {
+      "Program_name": "https://schema.metadatacenter.org/properties/3521c0a4-3cb9-4b8f-93f9-0454ae0a72b9"
+    },
+    "Program_name": {
+      "@value": "CHORDS"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/f8885458-b4e3-4375-8fb7-c81529057404"
+  },
+  "PROJECT_151": {
+    "@context": {
+      "project_GUID": "https://schema.metadatacenter.org/properties/ae6efa9f-f645-41ce-9d57-cda2cad1d59c",
+      "ProjecCode": "https://schema.metadatacenter.org/properties/ce99dd03-752d-4d29-92f0-b703ca9bea04",
+      "project_name": "https://schema.metadatacenter.org/properties/d0113916-e0b8-4b26-822d-9ccb583f779d",
+      "project_short_name": "https://schema.metadatacenter.org/properties/b6f426f0-75ab-44f4-b080-5a2aefd07f2e",
+      "project_sponsor": "https://schema.metadatacenter.org/properties/b327cc8d-c5a5-40ee-8e44-2e1f92784cc0",
+      "project_sponsor_other": "https://schema.metadatacenter.org/properties/9d6666ca-4390-467b-8797-e91c4a7542a8",
+      "project_sponsor_type": "https://schema.metadatacenter.org/properties/0a09a32e-919b-450a-8c5e-6b5280c3327b",
+      "project_sponsor_type_other": "https://schema.metadatacenter.org/properties/f353c0d9-02b1-4086-a596-66d40b3feca5",
+      "project_url": "https://schema.metadatacenter.org/properties/2585ffee-8e89-485f-b44a-e1f945028341"
+    },
+    "project_GUID": {
+      "@value": null
+    },
+    "ProjecCode": {
+      "@value": "PM2.5-ACAG-07102024-NA"
+    },
+    "project_name": {
+      "@value": "Satellite-Derived PM2.5"
+    },
+    "project_short_name": {
+      "@value": "PM2.5-ACAG-NA"
+    },
+    "project_sponsor": [
+      {
+        "@value": "Other"
+      }
+    ],
+    "project_sponsor_other": [
+      {
+        "@value": "Washington University in St. Louis"
+      },
+      {
+        "@value": "Atmospheric Composition Analysis Group (ACAG)"
+      }
+    ],
+    "project_sponsor_type": [
+      {
+        "@value": "Academic Institution"
+      }
+    ],
+    "project_sponsor_type_other": [
+      {
+        "@value": null
+      }
+    ],
+    "project_url": {
+      "@id": "https://sites.wustl.edu/acag/datasets/surface-pm2-5/"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/36e6119a-47ac-4d58-bcec-3ab1c087ed34"
+  },
+  "RESOURCE_151": {
+    "@context": {
+      "resource_GUID": "https://schema.metadatacenter.org/properties/395d7b78-7df4-4f87-bf2d-ed737ea0a163",
+      "resource_name": "https://schema.metadatacenter.org/properties/30180920-c9cd-4184-b862-517fbf0a6448",
+      "resource_type": "https://schema.metadatacenter.org/properties/0e9d47cb-5830-4c66-a712-8a4679532ddf",
+      "domain": "https://schema.metadatacenter.org/properties/a66fa3f7-0e4c-4dd2-95ea-8911edf7bf6f",
+      "domain_other": "https://schema.metadatacenter.org/properties/7e0e76ec-eebe-470a-8bdf-ec6d446b33d0",
+      "access_type": "https://schema.metadatacenter.org/properties/a9f58a11-091e-455d-85f7-b4a02a66c8dc",
+      "date_added": "https://schema.metadatacenter.org/properties/22e082a7-a677-4f22-be11-f1e524144f37",
+      "Date_updated": "https://schema.metadatacenter.org/properties/474948e3-03f7-4168-ad0d-7f6a5d8fa326",
+      "date_verified": "https://schema.metadatacenter.org/properties/115921e3-9860-42da-8cd1-7808f8eeebdc",
+      "Publication": "https://schema.metadatacenter.org/properties/c6dbe16e-b7a8-4d36-8e58-d2833487cb76",
+      "resource_short_name": "https://schema.metadatacenter.org/properties/20738dc0-8d33-4061-b1de-d4ebc3406df0",
+      "keywords": "https://schema.metadatacenter.org/properties/5d6e8c97-9baf-4e55-b972-f21bcf0f1e1f",
+      "resource_url": "https://schema.metadatacenter.org/properties/0dbb1ce4-3762-43df-b510-85e569b9c13a",
+      "resource_description": "https://schema.metadatacenter.org/properties/1738ec04-e63d-4c24-b418-466bd3c35a21",
+      "payment_required": "https://schema.metadatacenter.org/properties/4dfcf4d7-57cd-4af0-8146-0e30e2300e2e",
+      "is_static": "https://schema.metadatacenter.org/properties/1fc3039a-b4e6-4c0a-82e0-839a8ce204d4",
+      "Resource Reference_150": "https://schema.metadatacenter.org/properties/40d516a3-c2e7-48c9-a47a-1d86962656f0",
+      "Resource Use Agreement_150": "https://schema.metadatacenter.org/properties/de892817-974c-4e6e-9cf8-c82d5c53d71a",
+      "resource_version": "https://schema.metadatacenter.org/properties/ff394466-be17-43d0-8a96-0734a14c9fa2"
+    },
+    "resource_guid": {
+      "@value": null
+    },
+    "resource_name": {
+      "@value": "Atmospheric Composition Analysis Group (ACAG) North American Regional Estimates with Composition"
+    },
+    "resource_type": {
+      "@value": "Data Resource"
+    },
+    "domain": [
+      {
+        "@value": "Air Quality"
+      }
+    ],
+    "domain_other": [
+      {
+        "@value": null
+      }
+    ],
+    "access_type": [
+      {
+        "@value": "Open"
+      }
+    ],
+    "date_added": {
+      "@value": null
+    },
+    "Date_updated": {
+      "@value": null
+    },
+    "date_verified": {
+      "@value": null
+    },
+    "Publication": {
+      "@context": {
+        "publication_link": "https://schema.metadatacenter.org/properties/fbdce454-376d-47d8-92d0-dd76b9ec9f4e",
+        "publication_citation": "https://schema.metadatacenter.org/properties/ab995a4e-a162-4820-936f-7a5dfcba3cdb"
+      },
+      "publication_link": [
+        {
+          "@id": "https://doi.org/10.1021/acs.est.8b06392"
+        },
+        {
+          "@id": "https://doi.org/10.1021/acs.est.0c01764"
+        }
+      ],
+      "publication_citation": [
+        {
+          "@value": "Van Donkelaar, A., Martin, R. V., Li, C., & Burnett, R. T. (2019). Regional estimates of chemical composition of fine particulate matter using a combined geoscience-statistical method with information from satellites, models, and monitors. Environmental Science & Technology, 53(5), 2595-2611 dot: 10.1021/acs.est.8b06392."
+        },
+        {
+          "@value": "Hammer, M. S., van Donkelaar, A., Li, C., Lyapustin, A., Sayer, A. M., Hsu, N. C., Levy, R. C., Garay, M. J., Kalashnikova, O. V., Kahn, R. A., Brauer, M., Apte, J. S., Henze, D. K., Zhang, L., Zhang, Q., Ford, B., Pierce, J. R., & Martin, R. V. (2020). Global estimates and long-term trends of fine particulate matter concentrations (1998-2018). Environmental Science & Technology, doi: 10.1021/acs.est.0c01764."
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/626c45f3-4e9d-4d29-8c8f-5e5ab7e48f2c"
+    },
+    "resource_short_name": {
+      "@value": "ACAG North American Regional Estimates with Composition V4.NA.03"
+    },
+    "keywords": [
+      {
+        "@value": "Modeled Data"
+      },
+      {
+        "@value": "Air Pollution"
+      },
+      {
+        "@value": "PM2.5"
+      },
+      {
+        "@value": "Criteria Air Pollutants"
+      },
+      {
+        "@value": "Air Pollution Composition"
+      },
+      {
+        "@value": "Air Pollution Mixtures"
+      },
+      {
+        "@value": "Chemical Transport Model"
+      },
+      {
+        "@value": "Remote Sensing"
+      },
+      {
+        "@value": "Concentration Prediction"
+      },
+      {
+        "@value": "Annual Average"
+      },
+      {
+        "@value": "Geographically Weighted Regression"
+      },
+      {
+        "@value": "North America"
+      }
+    ],
+    "resource_url": {
+      "@id": "https://sites.wustl.edu/acag/datasets/surface-pm2-5-archive/#V4.NA.03"
+    },
+    "resource_description": {
+      "@value": "The Atmospheric Composition Analysis Group (ACAG) North American Regional Estimates with Composition (V4.NA.03) dataset presents estimated annual average fine particulate matter (PM2.5) air pollution total and compositional mass concentrations. This dataset covers North America with 0.01 degree (~1 km) spatial resolution during 2000 to 2018. Concentrations are estimated using satellite-based air pollution observations combined with a chemical transport model and subsequent calibration to ground-based air pollution observations using geographically weighted regression. This dataset covers total PM2.5 and the following PM2.5 components: black carbon (BC), ammonium (NH4), nitrate (NO3), sulfate (SO4), organic matter, mineral dust, and sea salt. This dataset is intended for use in large-scale, long-term epidemiological studies and health impact assessments."
+    },
+    "payment_required": {
+      "@value": "False"
+    },
+    "is_static": {
+      "@value": "True"
+    },
+    "Resource Reference_150": {
+      "@context": {
+        "resource_reference": "https://schema.metadatacenter.org/properties/708239b8-c6d7-4100-947e-27389304d5fc",
+        "resource_reference_link": "https://schema.metadatacenter.org/properties/1803de62-237c-4d4a-9df7-ba81c0f59326"
+      },
+      "resource_reference": {
+        "@value": "This is a resoure reference"
+      },
+      "resource_reference_link": {
+        "@id": "https://resource.reference.org/a_link"
+      },
+      "@id": "https://repo.metadatacenter.org/template-element-instances/4547bc65-e977-4a10-a021-a3b6e7193e59"
+    },
+    "Resource Use Agreement_150": {
+      "@context": {
+        "resource_use_agreement": "https://schema.metadatacenter.org/properties/f62f7609-8ed8-44ca-9536-25d4d58d048c",
+        "resource_use_agreement_link": "https://schema.metadatacenter.org/properties/176d9215-4b01-437d-9520-84a348ff0056"
+      },
+      "resource_use_agreement": {
+        "@value": "Users are asked to familiarize themselves with corresponding publications and contact principle researchers (as provided within subsequent sections) to ensure the most up-to-date and appropriate use of information."
+      },
+      "resource_use_agreement_link": {
+        "@id": "https://sites.wustl.edu/acag/datasets/"
+      },
+      "@id": "https://repo.metadatacenter.org/template-element-instances/3992776f-116d-4589-a4ca-a6bab6950c2f"
+    },
+    "resource_version": {
+      "@value": "V4.NA.03"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/b8dd36ae-a0b9-4991-b5a5-1773b21b70ec"
+  },
+  "KD_DATA RESOURCE_151": {
+    "@context": {
+      "source_name": "https://schema.metadatacenter.org/properties/f1410177-357b-4882-93ce-ee39187a4a32",
+      "update_frequency": "https://schema.metadatacenter.org/properties/0c0b551d-4fab-4518-ad03-a411f4bcb9b6",
+      "includes_citizen_collected": "https://schema.metadatacenter.org/properties/0b94ec22-348a-474d-a59b-befc62688a82",
+      "has_api": "https://schema.metadatacenter.org/properties/a9a1107a-ed6f-4da8-8b02-8b31bbd1c8b2",
+      "has_visualization_tool": "https://schema.metadatacenter.org/properties/a7307f38-6919-4b21-9290-109894f8afd2",
+      "update_frequency_other": "https://schema.metadatacenter.org/properties/2c2daca1-8bbc-4bda-9d4d-88233afaff87"
+    },
+    "source_name": [
+      {
+        "@value": ""
+      }
+    ],
+    "update_frequency": [
+      {
+        "@value": "Static"
+      }
+    ],
+    "includes_citizen_collected": {
+      "@value": "False"
+    },
+    "has_api": {
+      "@value": "False"
+    },
+    "has_visualization_tool": {
+      "@value": "False"
+    },
+    "update_frequency_other": {
+      "@value": null
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/92427c37-44af-403a-8bcd-44f65dfb5f8d"
+  },
+  "KEY DATASETS DATA_151": {
+    "@context": {
+      "measurement_method": "https://schema.metadatacenter.org/properties/275cc862-07e8-429c-968c-0e802f0da1f3",
+      "measurement_method_other": "https://schema.metadatacenter.org/properties/8459feb3-c372-4e14-a8e4-5a35fae91ff5",
+      "time_extent_start": "https://schema.metadatacenter.org/properties/c0a4e65c-69cf-4a3c-aa27-b06561024985",
+      "time_extent_end": "https://schema.metadatacenter.org/properties/31dd46b4-4d6f-4d7c-804f-ae7ebb53ee10",
+      "temporal_resolution": "https://schema.metadatacenter.org/properties/b47c81b6-2eb6-4a82-a9f6-4b157ec1c771",
+      "spatial_resolution": "https://schema.metadatacenter.org/properties/88f6ed5e-a633-4a33-831b-f0bda99cd290",
+      "spatial_resolution_other": "https://schema.metadatacenter.org/properties/52709509-1c93-4aa2-be6c-ad4be7203830",
+      "spatial_coverage": "https://schema.metadatacenter.org/properties/14879a97-7366-414e-9317-8437d3896a69",
+      "spatial_bounding_box": "https://schema.metadatacenter.org/properties/52ba1475-f93a-4d7e-a9b5-b47d0b4e160a",
+      "geometry_type": "https://schema.metadatacenter.org/properties/8b0708bd-abac-4d8c-8cd5-1617f01dd434",
+      "geometry_source": "https://schema.metadatacenter.org/properties/172a684c-f789-40e0-9fdd-c6e86d649835",
+      "model_methods": "https://schema.metadatacenter.org/properties/189d8fde-7d3e-422e-823a-d954387fe0c6",
+      "exposure_media": "https://schema.metadatacenter.org/properties/1c18c678-d4c9-4c58-95ea-42cc15789201",
+      "geographic_feature": "https://schema.metadatacenter.org/properties/cf7cd865-16ab-4ea4-be3f-f7a5c761c1cc",
+      "geographic_feature_other": "https://schema.metadatacenter.org/properties/c00fea8d-ff0d-4a13-8f1f-02f16e142b33",
+      "measures": "https://schema.metadatacenter.org/properties/36e6d707-65e7-4dc6-bdc7-c8f23ada4caa",
+      "Measures_other": "https://schema.metadatacenter.org/properties/a01ca22e-3dbc-45c3-a5cc-5c23dd3ce873",
+      "model_methods_other": "https://schema.metadatacenter.org/properties/a48e6fef-3aab-4984-9763-ed623a39ec00",
+      "time_available_comment": "https://schema.metadatacenter.org/properties/1b158ba5-eb4a-4642-936e-37fa0355ab62",
+      "data_formats": "https://schema.metadatacenter.org/properties/42ed71a4-a71c-491e-8327-3e2cef2aff13",
+      "Data Download": "https://schema.metadatacenter.org/properties/c07bb847-4edd-4912-b623-4d89e0b6e7bb",
+      "spatial_coverage_other": "https://schema.metadatacenter.org/properties/a6b1f287-6520-4955-94a7-b74435154f28",
+      "temporal_resolution_other": "https://schema.metadatacenter.org/properties/e7723547-3995-4b16-ab93-ee37c710805c",
+      "geometry_source_other": "https://schema.metadatacenter.org/properties/94112a3c-8580-4d42-a0a8-18a366058fc8",
+      "license_type": "https://schema.metadatacenter.org/properties/1060a0e9-cdb9-4b81-a117-b98036e37645",
+      "license_type_other": "https://schema.metadatacenter.org/properties/7541c1e0-3da4-48bb-a4bf-3822bf4ebc16",
+      "temporal_resolution_comment": "https://schema.metadatacenter.org/properties/8270ff82-904a-4a67-994c-c3a0f7d5a191",
+      "spatial_resolution_comment": "https://schema.metadatacenter.org/properties/7bdf51e8-f960-4cf3-bf9e-bf144c5d89b5",
+      "use_suggested": "https://schema.metadatacenter.org/properties/c4de83e8-93fd-4ec1-be15-aad6101e0ac2",
+      "use_suggested_other": "https://schema.metadatacenter.org/properties/b07cbf67-51d5-49cc-9a02-69d9949c1b6f",
+      "use_key_variables": "https://schema.metadatacenter.org/properties/e493e97e-fcc1-4f10-a284-74d40f557fd9",
+      "suggested_audience": "https://schema.metadatacenter.org/properties/242a31e9-b33c-4858-845e-f99c2b69e41a",
+      "Dataset Tools": "https://schema.metadatacenter.org/properties/f6619d47-2632-4e84-b1b6-8cdf675c1920",
+      "Example Application": "https://schema.metadatacenter.org/properties/8780061d-2b47-4156-9d3c-3498ad2b7e66",
+      "use_strengths": "https://schema.metadatacenter.org/properties/db36b557-ad2b-4ae2-a7fe-81a1b162ea85",
+      "use_limitations": "https://schema.metadatacenter.org/properties/820d6f90-0bc8-43a6-aa21-3d13429403b0",
+      "use_example_metrics": "https://schema.metadatacenter.org/properties/e21ceae3-f37d-46eb-adfb-9f3c28641550",
+      "spatial_resolution_all_other_available": "https://schema.metadatacenter.org/properties/fdd957b5-ce40-4b92-aefa-72998d0985f7",
+      "temporal_resolution_all_other_available": "https://schema.metadatacenter.org/properties/2e5d5df0-f543-4a19-8c06-f2de9115feb7",
+      "temporal_resolution_all_available": "https://schema.metadatacenter.org/properties/12b8e0c5-a250-4697-a065-709313a502a9",
+      "spatial_resolution_all_available": "https://schema.metadatacenter.org/properties/38d4bf33-96a3-4a21-a036-8ba7ca2404ef"
+    },
+    "measurement_method": [
+      {
+        "@value": null
+      }
+    ],
+    "measurement_method_other": [
+      {
+        "@value": null
+      }
+    ],
+    "time_extent_start": {
+      "@value": "2000"
+    },
+    "time_extent_end": {
+      "@value": "2018"
+    },
+    "temporal_resolution": {
+      "@value": "Annually"
+    },
+    "spatial_resolution": {
+      "@value": "Grid"
+    },
+    "spatial_resolution_other": [
+      {
+        "@value": "0.01 Degrees"
+      }
+    ],
+    "spatial_coverage": [
+      {
+        "@value": "North America"
+      }
+    ],
+    "spatial_bounding_box": [
+      {
+        "@value": null
+      }
+    ],
+    "geometry_type": [
+      {
+        "@value": "Grid"
+      }
+    ],
+    "geometry_source": [
+      {
+        "@value": null
+      }
+    ],
+    "model_methods": [
+      {
+        "@value": "Other"
+      }
+    ],
+    "exposure_media": [
+      {
+        "@value": "Air"
+      }
+    ],
+    "geographic_feature": [
+      {
+        "@value": "General"
+      }
+    ],
+    "geographic_feature_other": [
+      {
+        "@value": null
+      }
+    ],
+    "measures": [
+      {
+        "@value": "PM2.5"
+      },
+      {
+        "@value": "Black Carbon"
+      },
+      {
+        "@value": "Dust"
+      }
+    ],
+    "Measures_other": [
+      {
+        "@value": ""
+      }
+    ],
+    "model_methods_other": [
+      {
+        "@value": "Geographically Weighted Regression"
+      },
+      {
+        "@value": "Chemical Transport Model"
+      }
+    ],
+    "time_available_comment": {
+      "@value": null
+    },
+    "data_formats": [
+      {
+        "@value": "NetCDF"
+      },
+      {
+        "@value": "ASCII"
+      }
+    ],
+    "Data Download": {
+      "@context": {
+        "data_link": "https://schema.metadatacenter.org/properties/6df21615-8115-4b9e-a74d-598f98bc753f",
+        "data_location_text": "https://schema.metadatacenter.org/properties/2184be3f-99e9-455c-879d-6e73b9c6b226"
+      },
+      "data_link": [
+        {
+          "@id": "https://sites.wustl.edu/acag/datasets/surface-pm2-5-archive/#V4.NA.03"
+        }
+      ],
+      "data_location_text": [
+        {
+          "@value": null
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/71f135bc-14d1-436b-b401-4ceab354ba17"
+    },
+    "spatial_coverage_other": [
+      {
+        "@value": null
+      }
+    ],
+    "temporal_resolution_other": [
+      {
+        "@value": null
+      }
+    ],
+    "geometry_source_other": [
+      {
+        "@value": null
+      }
+    ],
+    "license_type": [
+      {
+        "@value": null
+      }
+    ],
+    "license_type_other": [
+      {
+        "@value": null
+      }
+    ],
+    "temporal_resolution_comment": {
+      "@value": null
+    },
+    "spatial_resolution_comment": {
+      "@value": null
+    },
+    "use_suggested": [
+      {
+        "@value": "Geospatial exposure assessment for studies on longer-term health outcomes (e.g., chronic conditions)"
+      },
+      {
+        "@value": "Geospatial exposure assessment at the individual-level or population-level"
+      },
+      {
+        "@value": "Long-term studies"
+      },
+      {
+        "@value": "Large-scale studies"
+      },
+      {
+        "@value": "Longitudinal studies"
+      },
+      {
+        "@value": "Cross-sectional studies"
+      },
+      {
+        "@value": "Studies of multi-pollutant mixtures"
+      }
+    ],
+    "use_suggested_other": [
+      {
+        "@value": null
+      }
+    ],
+    "use_key_variables": [
+      {
+        "@value": "PM2.5 Concentration"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Black Carbon (BC)"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Ammonium (NH4)"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Nitrate (NO3)"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Sulfate (SO4)"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Organic Matter"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Mineral Dust"
+      },
+      {
+        "@value": "PM2.5 Concentration Percentage Sea Salt"
+      }
+    ],
+    "suggested_audience": [
+      {
+        "@value": "Researcher"
+      }
+    ],
+    "Dataset Tools": {
+      "@context": {
+        "use_tool_link": "https://schema.metadatacenter.org/properties/57f8e6c6-b31f-4687-bb12-d54fd7389439",
+        "use_tools_text": "https://schema.metadatacenter.org/properties/b2c6cb3f-9de5-4730-9cdb-a48effcd0c4a"
+      },
+      "use_tool_link": [
+        {
+          "@id": "https://github.com/mitre/acagpm"
+        },
+        {
+          "@id": "https://sites.wustl.edu/acag/datasets/surface-pm2-5/"
+        }
+      ],
+      "use_tools_text": [
+        {
+          "@value": "R Package (ACAGPM) for standardizing this dataset to US Census geographies for population-level analyses"
+        },
+        {
+          "@value": "R code for converting the available NetCDF files to other raster file formats"
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/da6992aa-f708-4fd5-b1b5-16e3d2d39978"
+    },
+    "Example Application": {
+      "@context": {
+        "use_example_application_link": "https://schema.metadatacenter.org/properties/ad57a7e9-7718-487c-b367-ba4341ebc066",
+        "Use_example_application_text": "https://schema.metadatacenter.org/properties/48b456e1-bce6-4dab-a6fc-5d82cbab57b6"
+      },
+      "use_example_application_link": [
+        {
+          "@value": "https://www.niehs.nih.gov/research/atniehs/labs/crb/studies/pegs/about/data"
+        },
+        {
+          "@value": "https://www.canuedata.ca"
+        }
+      ],
+      "Use_example_application_text": [
+        {
+          "@value": "Geospatial exposure assessment in NIEHS PEGS health cohort"
+        },
+        {
+          "@value": "Geospatial exposure assessment in CANUE health cohorts"
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/bcb7f850-e99c-4fa1-bd45-26aa60c9e4c8"
+    },
+    "use_strengths": [
+      {
+        "@value": "Dataset supports analysis of differences in composition of PM2.5 air pollution concentration across North America over multiple decades using consistent methods"
+      }
+    ],
+    "use_limitations": [
+      {
+        "@value": "Dataset does not include estimates of model uncertainty for each prediction"
+      },
+      {
+        "@value": "Dataset cannot be used to compare exposures within the same grid cell or at different times within the same year"
+      },
+      {
+        "@value": "Data intended for use in long-term, large-scale studies (increased uncertainties expected for use at finer spatial and temporal resolutions)"
+      },
+      {
+        "@value": "Finest available gridded estimates do not fully resolve spatial gradients in air pollution due to the influence of input data sources with coarser spatial resolution"
+      }
+    ],
+    "use_example_metrics": [
+      {
+        "@value": "Annual average air pollution concentration for grid cell containing geocoded address"
+      }
+    ],
+    "spatial_resolution_all_other_available": [
+      {
+        "@value": "0.01 Degrees"
+      }
+    ],
+    "temporal_resolution_all_other_available": [
+      {
+        "@value": null
+      }
+    ],
+    "temporal_resolution_all_available": [
+      {
+        "@value": "Annually"
+      }
+    ],
+    "spatial_resolution_all_available": [
+      {
+        "@value": "Grid"
+      }
+    ],
+    "@id": "https://repo.metadatacenter.org/template-element-instances/37fd6d88-48e9-4c1b-b319-ddda38586654"
+  },
+  "schema:isBasedOn": "https://repo.metadatacenter.org/templates/361109bf-dabf-403d-80bd-fde1ea093070",
+  "schema:name": "04_KeyDatasets_Data_1.5.1_ACAG_North_American_PM2.5_V4.NA.03",
+  "schema:description": "Migration from key dataset spreadsheet",
+  "pav:createdOn": "2025-02-11T13:49:14-08:00",
+  "pav:createdBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
+  "pav:lastUpdatedOn": "2025-02-24T13:59:33-08:00",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
+  "@id": "https://repo.metadatacenter.org/template-instances/5f2d2b90-3a7b-46e9-8aa8-6e9d9de88132"
+}
