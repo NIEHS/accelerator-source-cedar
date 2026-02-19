@@ -5,11 +5,7 @@ from typing import List
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import SynchType
 from accelerator_core.workflow.accel_source_ingest import AccelIngestComponent, IngestSourceDescriptor, IngestPayload
-
 from accelerator_source_cedar.accel_cedar.cedar_access import CedarAccess
-from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
-from accelerator_source_cedar.accel_cedar.process_result import ProcessResult
-
 
 CEDAR_API_KEY = "api_key"
 
@@ -65,9 +61,9 @@ class CedarAccelSource(AccelIngestComponent):
             json_dict = cedar_access.retrieve_resource(identifier)
 
         logger.debug(f"cedar json returned\n{json_dict}")
-
         ingestPayload = IngestPayload(self.ingest_source_descriptor)
-        self.report_individual(ingestPayload, identifier, json_dict)
+        ingestPayload.payload_inline = False
+        self.report_individual(ingestPayload, additional_parameters["run_id"], identifier, json_dict)
         ingestPayload.ingest_successful = True
         return ingestPayload
 

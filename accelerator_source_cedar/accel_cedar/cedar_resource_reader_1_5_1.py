@@ -3,7 +3,6 @@ import logging
 import uuid
 import warnings
 
-from accelerator_core.schema.models.accel_model import AccelPopulationDataModel, AccelDataResourceModel
 from accelerator_source_cedar.accel_cedar.cedar_intermediate_model import PcorIntermediateProgramModel, \
     PcorSubmissionInfoModel, PcorIntermediateProjectModel, PcorIntermediateResourceModel, \
     PcorGeospatialDataResourceModel, PcorGeoToolModel, PcorPopDataResourceModel, PcorKeyDatasetModel

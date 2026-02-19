@@ -50,15 +50,15 @@
       "comment": "https://schema.metadatacenter.org/properties/6d11bd44-02e2-4915-b78d-d4dd1788fef5"
     },
     "submitter_name": {
-      "@value": "Gupta, Rupali"
+      "@value": "Charles Schmitt"
     },
     "submitter_email": {
-      "@value": "rupali.gupta@nih.gov"
+      "@value": "charles.schmitt@nih.gov"
     },
     "comment": {
-      "@value": null
+      "@value": "migrated from spreadsheet /Users/conwaymc/Downloads/OneDrive_1_2-5-2025/PopulationData_1.4.1_Census_ACS_v4.xlsm into CEDAR va pcor_tools"
     },
-    "@id": "https://repo.metadatacenter.org/template-element-instances/b5461b7c-33f6-4e63-b232-dac906946e36"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/e4467151-11a2-4e80-a39f-4c0a3e7d3edb"
   },
   "PROGRAM": {
     "@context": {
@@ -67,7 +67,7 @@
     "Program_name": {
       "@value": "CHORDS"
     },
-    "@id": "https://repo.metadatacenter.org/template-element-instances/78470d47-6725-4cc9-ba34-ff5010ae60c1"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/0c9e1038-adbe-44a7-8478-6f795ea0541b"
   },
   "PROJECT": {
     "@context": {
@@ -85,25 +85,22 @@
       "@value": null
     },
     "ProjecCode": {
-      "@value": "NOMS-041225"
+      "@value": "ACS-022525"
     },
     "project_name": {
-      "@value": "National Occupational Mortality Surveillance"
+      "@value": "American Community Survey (ACS)"
     },
     "project_short_name": {
-      "@value": "NOMS"
+      "@value": "ACS"
     },
     "project_sponsor": [
       {
-        "@value": "Centers for Disease Control and Prevention (CDC)"
-      },
-      {
-        "@value": "Other"
+        "@value": "United States Census Bureau (US Census)"
       }
     ],
     "project_sponsor_other": [
       {
-        "@value": "National Institute for Occupational Safety and Health (NIOSH)"
+        "@value": null
       }
     ],
     "project_sponsor_type": [
@@ -117,9 +114,9 @@
       }
     ],
     "project_url": {
-      "@id": "https://www.cdc.gov/niosh/surveillance/noms/?CDC_AAref_Val=https://www.cdc.gov/niosh/topics/noms/default.html"
+      "@id": "https://www.census.gov/programs-surveys/acs"
     },
-    "@id": "https://repo.metadatacenter.org/template-element-instances/e978e294-686f-4d9f-9160-5188b327ef7d"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/fbba98ba-2983-416d-8336-f6a255c7ccd6"
   },
   "RESOURCE": {
     "@context": {
@@ -147,19 +144,22 @@
       "@value": null
     },
     "resource_name": {
-      "@value": "National Occupational Mortality Surveillance"
+      "@value": "American Community Survey (ACS)"
     },
     "resource_type": {
       "@value": "Data Resource"
     },
     "domain": [
       {
-        "@value": "Other"
+        "@value": "Social Determinants Of Health"
+      },
+      {
+        "@value": "Neighborhood"
       }
     ],
     "domain_other": [
       {
-        "@value": "Public Records"
+        "@value": null
       }
     ],
     "access_type": [
@@ -183,7 +183,7 @@
       },
       "publication_link": [
         {
-          "@id": "https://www2a.cdc.gov/nioshtic-2/BuildQyr.asp?s1=%27National+Occupational+Mortality+Surveillance%27+or+NOMS&f1=*&t1=2&s2=20045639&f2=NN&t2=0&s3=&f3=TI&terms=3&Adv=1&n=new&View=b&Startyear=&EndYear=&whichdate=DP&D1=10&Limit=500&Sort=DP+DESC&ct=&B1=Search"
+          "@id": "https://www.census.gov/library/publications.html"
         }
       ],
       "publication_citation": [
@@ -191,30 +191,27 @@
           "@value": null
         }
       ],
-      "@id": "https://repo.metadatacenter.org/template-element-instances/4bf6e236-82e7-4ce6-b41b-c16aec87c81c"
+      "@id": "https://repo.metadatacenter.org/template-element-instances/e1dd8e12-db03-4f34-a018-3ed5dff3e8a6"
     },
     "resource_short_name": {
-      "@value": "NOMS"
+      "@value": "ACS"
     },
     "keywords": [
       {
-        "@value": "Work Related Mortality"
+        "@value": "Population"
       },
       {
-        "@value": "Work Related Health Disorder"
+        "@value": "Housing"
       },
       {
-        "@value": "Occupation Linked Suicide Rates"
-      },
-      {
-        "@value": "Occupation Linked Lung Disease"
+        "@value": "Socioeconomics"
       }
     ],
     "resource_url": {
-      "@id": "https://www.cdc.gov/niosh/surveillance/noms/?CDC_AAref_Val=https://www.cdc.gov/niosh/topics/noms/default.html"
+      "@id": "https://www.census.gov/programs-surveys/acs"
     },
     "resource_description": {
-      "@value": "The National Occupational Mortality Surveillance (NOMS) program is coordinated by the CDC, National Institute for Occupational Safety and Health (NIOSH). NOMS is a surveillance system that monitors and analyzes mortality data by occupation and industry code included on death certificates to identify work-related causes of death. This helps detect patterns that may be indicative of health risks associated with certain jobs. NOMS has helped reveal: 1) High rates of mesothelioma in construction and shipyard workers (linked to asbestos exposure); 2) Increased suicide rates in certain occupations (like farming and construction); and 3) Patterns of lung disease among coal miners and other industrial workers. Data are also accessible from the National Vital Statistics System."
+      "@value": "The American Community Survey (ACS) is a large-scale ongoing community survey conducted by the U.S. Census that provides yearly updated, detailed data on population, economics, demographics, housing, and other related information.Various guides, tutorials, and tools to support use of the data are also available at https://www.census.gov/programs-surveys/acs/guidance.html for guidance."
     },
     "payment_required": {
       "@value": "False"
@@ -228,10 +225,12 @@
         "resource_reference_link": "https://schema.metadatacenter.org/properties/1803de62-237c-4d4a-9df7-ba81c0f59326"
       },
       "resource_reference": {
-        "@value": "NIOSH (2024). National Occupational Mortality Surveillance (NOMS). U.S. Department of Health and Human Services, Public Health Service, Centers for Disease Control and Prevention, National Institute for Occupational Safety and Health, Division of Field Studies and Engineering, Health Informatics Branch. Date accessed._mm/dd/yyyy."
+        "@value": null
       },
-      "resource_reference_link": {},
-      "@id": "https://repo.metadatacenter.org/template-element-instances/d4a8fdae-40ef-48c8-a000-c590f2a9a0cd"
+      "resource_reference_link": {
+        "@id": "https://www.census.gov/about/policies/citation.html"
+      },
+      "@id": "https://repo.metadatacenter.org/template-element-instances/3906602c-9ec1-4a43-bb25-014bb7444604"
     },
     "Resource Use Agreement_150": {
       "@context": {
@@ -241,13 +240,15 @@
       "resource_use_agreement": {
         "@value": null
       },
-      "resource_use_agreement_link": {},
-      "@id": "https://repo.metadatacenter.org/template-element-instances/0a755155-aede-44d8-bc83-0ca51d3f4761"
+      "resource_use_agreement_link": {
+        "@id": "https://www.census.gov/data/developers/about/terms-of-service.html"
+      },
+      "@id": "https://repo.metadatacenter.org/template-element-instances/76e2863d-a6e6-4283-8534-b384ce930fbc"
     },
     "resource_version": {
       "@value": null
     },
-    "@id": "https://repo.metadatacenter.org/template-element-instances/c581ab5b-8b52-4cc5-a333-fa73d21a8ba3"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/2359f1b7-bcaa-432a-bf13-b293bac78377"
   },
   "DATA RESOURCE": {
     "@context": {
@@ -267,11 +268,11 @@
     ],
     "update_frequency": [
       {
-        "@value": "Other"
+        "@value": "Annually"
       }
     ],
     "includes_citizen_collected": {
-      "@value": "True"
+      "@value": "False"
     },
     "has_api": {
       "@value": "True"
@@ -280,15 +281,15 @@
       "@value": "True"
     },
     "Comments": {
-      "@value": "1) Death certificate data only includes information on the usual or longest-held occupation and industry. 2) The usual occupation and industry or cause of death may be reported inaccurately. This may result in misclassification, which could be a source of bias. 3) Occupational exposure information is not available, aside from what can be inferred from a person's occupation or industry."
+      "@value": "ACS provides various guides, tutorials, and tools to support use of the data, see https://www.census.gov/programs-surveys/acs/guidance.html for guidance.  See https://www2.census.gov/programs-surveys/acs/tech_docs/statistical_testing/2022_Instructions_for_Stat_Testing_ACS.pdf for applying statistical testing."
     },
     "intended_use": {
-      "@value": "The goal is to help identify occupations and industries where workers may be at increased risk for specific causes of death, e.g., certain cancers, respiratory diseases, or injuries, so that preventive actions can be taken."
+      "@value": "The ACS is intended to assist local, state, and federal officials, community leaders, nongovernmental organizations, emergency planners, educators, journalists, businesses, and the general public understand the changes taking place in their communities."
     },
     "update_frequency_other": {
-      "@value": "Multi-year cycles, e.g., 1999–2010, 2012–2017"
+      "@value": null
     },
-    "@id": "https://repo.metadatacenter.org/template-element-instances/afcd70a4-46e6-4924-9c8f-6845c30a9629"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/cc08817d-90ef-4950-ac97-4b573585a8c6"
   },
   "POPULATION DATA RESORCE": {
     "@context": {
@@ -325,10 +326,67 @@
     ],
     "measures": [
       {
-        "@value": "Death"
+        "@value": "Population"
       },
       {
-        "@value": "Occupation"
+        "@value": "Living Conditions"
+      },
+      {
+        "@value": "Disability"
+      },
+      {
+        "@value": "Immigration"
+      },
+      {
+        "@value": "Socioeconomic Indicators"
+      },
+      {
+        "@value": "Segregation"
+      },
+      {
+        "@value": "Household"
+      },
+      {
+        "@value": "Language"
+      },
+      {
+        "@value": "Fertility"
+      },
+      {
+        "@value": "Commute"
+      },
+      {
+        "@value": "Income"
+      },
+      {
+        "@value": "Employment"
+      },
+      {
+        "@value": "Poverty"
+      },
+      {
+        "@value": "Occupation and Industry"
+      },
+      {
+        "@value": "Education"
+      },
+      {
+        "@value": "Housing"
+      },
+      {
+        "@value": "Transportation"
+      },
+      {
+        "@value": "Migration"
+      },
+      {
+        "@value": "Internet"
+      },
+      {
+        "@value": "Food Access"
+      },
+      {
+        "@value": "Health Insurance"
       }
     ],
     "measures_others": [
@@ -337,16 +395,16 @@
       }
     ],
     "time_extent_start": {
-      "@value": "2020"
+      "@value": "2005"
     },
     "time_extent_end": {
-      "@value": "Current"
+      "@value": "2025"
     },
     "temporal_resolution": {
-      "@value": "Other"
+      "@value": "Annually"
     },
     "spatial_resolution": {
-      "@value": "State"
+      "@value": "Census Block Group"
     },
     "spatial_resolution_other": [
       {
@@ -355,20 +413,17 @@
     ],
     "spatial_coverage": [
       {
-        "@value": "United States"
-      },
-      {
-        "@value": "Other"
+        "@value": "United States, Puerto Rico"
       }
     ],
     "geometry_type": [
       {
-        "@value": null
+        "@value": "Polygon"
       }
     ],
     "geometry_source": [
       {
-        "@value": null
+        "@value": "US Census"
       }
     ],
     "model_methods": [
@@ -378,7 +433,7 @@
     ],
     "population_studied": [
       {
-        "@value": "Workers"
+        "@value": "General Population"
       }
     ],
     "population_studied_other": [
@@ -391,7 +446,7 @@
         "@value": "XLSX"
       },
       {
-        "@value": "PDF"
+        "@value": "CSV"
       }
     ],
     "biospecimens_type": [
@@ -406,7 +461,7 @@
       "@value": "False"
     },
     "individual_level": {
-      "@value": "True"
+      "@value": "False"
     },
     "model_methods_other": [
       {
@@ -414,7 +469,7 @@
       }
     ],
     "time_available_comment": {
-      "@value": "Starting in 2020 data are available for public use."
+      "@value": "Data is released in the year following the year data is collected.  Five year releases are also provided."
     },
     "Data Download": {
       "@context": {
@@ -423,7 +478,7 @@
       },
       "data_link": [
         {
-          "@id": "https://wwwn.cdc.gov/NIOSH-WHC/chart/noms-cod?T=O&OU=001&V=R&chk_codes=False&A=A02"
+          "@id": "https://data.census.gov/"
         }
       ],
       "data_location_text": [
@@ -431,16 +486,16 @@
           "@value": null
         }
       ],
-      "@id": "https://repo.metadatacenter.org/template-element-instances/83904d8b-7ece-48af-ac9b-49834713e247"
+      "@id": "https://repo.metadatacenter.org/template-element-instances/ca724a39-2cd8-4ab5-a694-9d1f55ef821d"
     },
     "spatial_coverage_other": [
       {
-        "@value": "52 Vital Statistics Jurisdictions starting 2022"
+        "@value": null
       }
     ],
     "temporal_resolution_other": [
       {
-        "@value": "Multi-year cycles, e.g., 1999–2010, 2012–2017"
+        "@value": null
       }
     ],
     "geometry_source_other": [
@@ -448,14 +503,14 @@
         "@value": null
       }
     ],
-    "@id": "https://repo.metadatacenter.org/template-element-instances/06f60db0-2d3a-41ff-aa44-fbfebb6b5acb"
+    "@id": "https://repo.metadatacenter.org/template-element-instances/37edc447-7ab4-4ea1-99b4-802ea6754c07"
   },
-  "schema:isBasedOn": "https://repo.metadatacenter.org/templates/7a6d9231-9c22-46d0-a3f6-642357ae1831",
-  "schema:name": "Population_Data_1.5.1_CDC_NOMS",
-  "schema:description": "",
-  "pav:createdOn": "2025-04-11T07:59:41-07:00",
+  "schema:isBasedOn": "https://repo.metadatacenter.org/templates/0015b649-92a2-4e32-9cbd-f39f8b0ce7ad",
+  "schema:name": "American Community Survey (ACS)",
+  "schema:description": "Population Data via jinja template",
+  "pav:createdOn": "2025-02-11T12:06:08-08:00",
   "pav:createdBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
-  "pav:lastUpdatedOn": "2025-06-04T09:20:51-07:00",
+  "pav:lastUpdatedOn": "2025-02-25T09:55:28-08:00",
   "oslc:modifiedBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
-  "@id": "https://repo.metadatacenter.org/template-instances/327e00aa-498e-4928-af30-87795cb4a1fa"
+  "@id": "https://repo.metadatacenter.org/template-instances/2b1f7121-6393-422a-8150-5224de23f1f8"
 }

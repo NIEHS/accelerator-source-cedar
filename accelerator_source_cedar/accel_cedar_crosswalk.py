@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+import logging
 
 from accelerator_core.schema.models.accel_model import AccelProgramModel, AccelProjectModel, \
     AccelIntermediateResourceModel, build_accel_from_model, ProjectSponsor, OtherType, AccelPublicationModel, \
@@ -8,14 +8,10 @@ from accelerator_core.schema.models.accel_model import AccelProgramModel, AccelP
 from accelerator_core.schema.models.base_model import SubmissionInfoModel, TechnicalMetadataModel
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_source_ingest import (
-    IngestSourceDescriptor,
     IngestPayload,
 )
 from accelerator_core.workflow.crosswalk import Crosswalk
-
 from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_1 import CedarResourceReader_1_5_1
-
-import logging
 
 logger = logging.getLogger(__name__)
 
