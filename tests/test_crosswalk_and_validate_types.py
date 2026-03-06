@@ -33,7 +33,7 @@ class TestCrosswalkAndValidate(unittest.TestCase):
     def test_crosswalk_key_dataset2(self):
         ingest_source_descriptor = IngestSourceDescriptor()
         ingest_source_descriptor.ingest_type = "accelerator"
-        ingest_source_descriptor.schema_version = "1.0.1"
+        ingest_source_descriptor.schema_version = "1.0.3"
         ingest_source_descriptor.ingest_item_id = "item_id"
         ingest_source_descriptor.ingest_identifier = "cedar"
         ingest_source_descriptor.submitter_name = "<NAME>"

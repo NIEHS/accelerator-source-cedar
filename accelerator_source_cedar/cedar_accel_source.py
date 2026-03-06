@@ -1,16 +1,18 @@
 import json
+import logging
 
-from accelerator_core.utils.logger import setup_logger
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
+from accelerator_core.workflow.accel_data_models import SynchType
 from accelerator_core.workflow.accel_source_ingest import AccelIngestComponent, IngestSourceDescriptor, IngestPayload
 
 from accelerator_source_cedar.accel_cedar.cedar_access import CedarAccess
 from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
 from accelerator_source_cedar.accel_cedar.process_result import ProcessResult
 
-logger = setup_logger("accelerator")
 
 CEDAR_API_KEY = "api_key"
+
+logger = logging.getLogger(__name__)
 
 class CedarAccelParameters():
 
@@ -68,6 +70,48 @@ class CedarAccelSource(AccelIngestComponent):
         ingestPayload.ingest_successful = True
         return ingestPayload
 
-    def ingest(self, additional_parameters: dict) -> IngestPayload:
-        pass
+    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> IngestPayload:
+        """
+        Carry out a synch between a CEDAR folder (by folder id GUID) and acclerator.
+        :param synch_type: Synch type
+        :param identifier: CEDAR folder identifier
+        :param additional_parameters: dict with any additional parameters
+
+        Note that a key of RECURSE with a value of True will cause this method to recurse into subfolders, otherwise,
+        no recursion is performed.
+
+
+        :return: IngestPayload (this will typically be multiple payload entries)
+        """
+
+        logger.info(f"synch( synch_type={synch_type}, identifier={identifier}, additional_parameters={additional_parameters} )")
+
+        if synch_type != SynchType.SOURCE:
+            raise Exception(f"synch_type={synch_type} not supported")
+
+        recurse = additional_parameters.get('RECURSE', False)
+
+        cedar_access = CedarAccess(params=additional_parameters)
+        folder = cedar_access.retrieve_folder_contents(identifier)
+        logger.debug(f"folder returned\n{folder}")
+
+        ingestPayload = IngestPayload(self.ingest_source_descriptor)
+
+        for item in folder.subfolders:
+
+            if item.item_type == "folder":
+                continue
+
+            vals = {
+                "name": item.folder_name,
+                "item_type": item.item_type,
+                "id": item.folder_id,
+            }
+
+            self.report_individual(ingestPayload, item.folder_id, vals)
+
+
+        return ingestPayload
+
+
 

@@ -6,7 +6,6 @@ from accelerator_core.schema.models.accel_model import AccelProgramModel, AccelP
     AccelGeospatialDataModel, AccelDataLocationModel, AccelDataUsageModel, AccelComputationalWorkflow, \
     AccelPopulationDataModel
 from accelerator_core.schema.models.base_model import SubmissionInfoModel, TechnicalMetadataModel
-from accelerator_core.utils.logger import setup_logger
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_source_ingest import (
     IngestSourceDescriptor,
@@ -16,7 +15,9 @@ from accelerator_core.workflow.crosswalk import Crosswalk
 
 from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_1 import CedarResourceReader_1_5_1
 
-logger = setup_logger("accelerator-source-cedar")
+import logging
+
+logger = logging.getLogger(__name__)
 
 class CedarToAccelCrosswalk(Crosswalk):
     """Abstract superclass for mapping raw data to a structured JSON format."""
