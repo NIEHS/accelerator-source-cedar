@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class CedarConfig(object):
 
     ENV_API_KEY = "CEDAR_API_KEY"
-    ENV_CEDAR_ID_KEY = "CEDAR_ID"
+    ENV_CEDAR_FOLDER_KEY = "CEDAR_FOLDER_ID"
 
     def __init__(self, config_param:dict):
         """
@@ -28,12 +28,12 @@ class CedarConfig(object):
         self.params = config_param
 
         api_key = os.environ.get(self.ENV_API_KEY, None)
-        cedar_id = os.environ.get(self.ENV_CEDAR_ID_KEY, None)
+        chords_folder = os.environ.get(self.ENV_CEDAR_FOLDER_KEY, None)
 
         if api_key:
             self.params["api_key"] = api_key
-        if cedar_id:
-            self.params["cedar_id"] = cedar_id
+        if chords_folder:
+            self.params["chords_folder"] = chords_folder
 
 
     def build_request_headers_json(self):

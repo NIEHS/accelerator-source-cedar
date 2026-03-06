@@ -2,7 +2,9 @@ import json
 import unittest
 
 from accelerator_core.utils import resource_utils
+
 from accelerator_core.utils.accelerator_config import config_from_file
+from accelerator_core.utils.resource_utils import determine_test_resource_path
 from accelerator_core.utils.schema_tools import SchemaTools
 from accelerator_core.utils.xcom_utils import DirectXcomPropsResolver
 from accelerator_core.workflow.accel_data_models import IngestSourceDescriptor, IngestPayload
@@ -31,6 +33,7 @@ class TestCrosswalkAndValidate(unittest.TestCase):
     def test_crosswalk_key_dataset2(self):
         ingest_source_descriptor = IngestSourceDescriptor()
         ingest_source_descriptor.ingest_type = "accelerator"
+        ingest_source_descriptor.schema_version = "1.0.3"
         ingest_source_descriptor.ingest_item_id = "item_id"
         ingest_source_descriptor.ingest_identifier = "cedar"
         ingest_source_descriptor.submitter_name = "<NAME>"

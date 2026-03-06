@@ -1,14 +1,18 @@
-from accelerator_core.utils.logger import setup_logger
+import json
+import logging
+
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
+from accelerator_core.workflow.accel_data_models import SynchType
 from accelerator_core.workflow.accel_source_ingest import AccelIngestComponent, IngestSourceDescriptor, IngestPayload
 
 from accelerator_source_cedar.accel_cedar.cedar_access import CedarAccess
 from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
 from accelerator_source_cedar.accel_cedar.process_result import ProcessResult
 
-logger = setup_logger("accelerator")
 
 CEDAR_API_KEY = "api_key"
+
+logger = logging.getLogger(__name__)
 
 class CedarAccelParameters():
 
@@ -23,7 +27,24 @@ class CedarAccelSource(AccelIngestComponent):
     def __init__(self, ingest_source_descriptor:IngestSourceDescriptor,  xcom_props_resolver:XcomPropsResolver):
         super().__init__(ingest_source_descriptor, xcom_props_resolver)
 
-    def ingest_single(self, identifier, additional_parameters: dict) -> IngestPayload:
+    def reacquire_supported(self) -> bool:
+        """
+        Informational method that indicates whether this ingest component supports reacquisition
+        """
+        return True
+
+    def ingest_single(self, identifier:str, additional_parameters: dict) -> IngestPayload:
+        """
+        Ingest a single CEDAR document based on its CEDAR ID.
+
+        :param identifier: CEDAR document identifier
+        :param additional_parameters: Additional parameters for this ingest component
+
+        For ease in testing, this method allows a file path to be passed in as the identifier with the key/value of
+        FILE:True, which will cause this method to load the CEDAR data as a JSON file and skip reading CEDAR API.
+
+        """
+
         logger.info(f"ingest_single({identifier})")
 
         # set up cedar properties and access utilities
@@ -31,19 +52,66 @@ class CedarAccelSource(AccelIngestComponent):
         # api_key=xxxxxxx
         # cedar_endpoint=https://resource.metadatacenter.org
 
-        cedar_access = CedarAccess(additional_parameters)
-        logger.debug("retrieving from cedar...")
-        json_dict = cedar_access.retrieve_resource(identifier)
+        is_file = additional_parameters.get('FILE', False)
+        json_dict = None
+        if is_file:
+            logger.info(f"ingest_single using file direct ({identifier})")
+            with open(identifier) as json_data:
+                json_dict = json.load(json_data)
+        else:
+            cedar_access = CedarAccess(additional_parameters)
+            logger.debug("retrieving from cedar...")
+            json_dict = cedar_access.retrieve_resource(identifier)
+
         logger.debug(f"cedar json returned\n{json_dict}")
+
         ingestPayload = IngestPayload(self.ingest_source_descriptor)
-        ingestPayload.payload_inline = False
-        ingestPayload.ingest_source_descriptor.ingest_identifier = additional_parameters["run_id"]
-        ingestPayload.ingest_source_descriptor.ingest_item_identifier = identifier
         self.report_individual(ingestPayload, identifier, json_dict)
         ingestPayload.ingest_successful = True
         return ingestPayload
 
+    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> IngestPayload:
+        """
+        Carry out a synch between a CEDAR folder (by folder id GUID) and acclerator.
+        :param synch_type: Synch type
+        :param identifier: CEDAR folder identifier
+        :param additional_parameters: dict with any additional parameters
 
-    def ingest(self, additional_parameters: dict) -> IngestPayload:
-        pass
+        Note that a key of RECURSE with a value of True will cause this method to recurse into subfolders, otherwise,
+        no recursion is performed.
+
+
+        :return: IngestPayload (this will typically be multiple payload entries)
+        """
+
+        logger.info(f"synch( synch_type={synch_type}, identifier={identifier}, additional_parameters={additional_parameters} )")
+
+        if synch_type != SynchType.SOURCE:
+            raise Exception(f"synch_type={synch_type} not supported")
+
+        recurse = additional_parameters.get('RECURSE', False)
+
+        cedar_access = CedarAccess(params=additional_parameters)
+        folder = cedar_access.retrieve_folder_contents(identifier)
+        logger.debug(f"folder returned\n{folder}")
+
+        ingestPayload = IngestPayload(self.ingest_source_descriptor)
+
+        for item in folder.subfolders:
+
+            if item.item_type == "folder":
+                continue
+
+            vals = {
+                "name": item.folder_name,
+                "item_type": item.item_type,
+                "id": item.folder_id,
+            }
+
+            self.report_individual(ingestPayload, item.folder_id, vals)
+
+
+        return ingestPayload
+
+
 
