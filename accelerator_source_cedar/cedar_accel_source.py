@@ -95,9 +95,12 @@ class CedarAccelSource(AccelIngestComponent):
         folder = cedar_access.retrieve_folder_contents(identifier)
         logger.debug(f"folder returned\n{folder}")
 
-        ingestPayload = IngestPayload(self.ingest_source_descriptor)
+        payloads = []
 
         for item in folder.subfolders:
+
+            ingestPayload = IngestPayload(self.ingest_source_descriptor)
+            ingestPayload.payload_inline = True
 
             if item.item_type == "folder":
                 continue
@@ -109,9 +112,9 @@ class CedarAccelSource(AccelIngestComponent):
             }
 
             self.report_individual(ingestPayload, item.folder_id, vals)
+            payloads.append(ingestPayload)
 
-
-        return ingestPayload
+        return payloads
 
 
 

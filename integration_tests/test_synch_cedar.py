@@ -47,7 +47,7 @@ class TestSynchCedar(unittest.TestCase):
 
         cedar_accel_source = CedarAccelSource(ingest_source_descriptor, xcom_props_resolver)
         actual = cedar_accel_source.synch(SynchType.SOURCE,
-                config.params.get("chords_folder",None), additional_parameters=config.params)
+                config.params.get("cedar_id",None), additional_parameters=config.params)
         self.assertIsNotNone(actual)
 
 

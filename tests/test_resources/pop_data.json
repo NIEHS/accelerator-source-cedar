@@ -1,0 +1,461 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "rdfs:label": {
+      "@type": "xsd:string"
+    },
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:derivedFrom": {
+      "@type": "@id"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "skos:notation": {
+      "@type": "xsd:string"
+    },
+    "SUBMITTER": "https://schema.metadatacenter.org/properties/8148747c-3f72-42a5-8236-8025763c8808",
+    "PROGRAM": "https://schema.metadatacenter.org/properties/b135904c-fec9-4c0e-b825-cd0efd9015de",
+    "PROJECT": "https://schema.metadatacenter.org/properties/12dd994a-0be7-4ed2-906d-9c1b98f26358",
+    "RESOURCE": "https://schema.metadatacenter.org/properties/c072e5e1-095d-4518-bc21-574d4492286c",
+    "DATA RESOURCE": "https://schema.metadatacenter.org/properties/0216ddcb-a8bc-490b-ab8a-5b4971cf19f7",
+    "POPULATION DATA RESORCE": "https://schema.metadatacenter.org/properties/2bd867fc-01e0-4982-9632-964bdbc13008"
+  },
+  "SUBMITTER": {
+    "@context": {
+      "submitter_name": "https://schema.metadatacenter.org/properties/96a4f91e-12ab-4e54-b81d-c2914ef4a68c",
+      "submitter_email": "https://schema.metadatacenter.org/properties/ee4a4a76-80a5-4283-86df-7c4d55f38072",
+      "comment": "https://schema.metadatacenter.org/properties/6d11bd44-02e2-4915-b78d-d4dd1788fef5"
+    },
+    "submitter_name": {
+      "@value": "Gupta, Rupali"
+    },
+    "submitter_email": {
+      "@value": "rupali.gupta@nih.gov"
+    },
+    "comment": {
+      "@value": null
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/b5461b7c-33f6-4e63-b232-dac906946e36"
+  },
+  "PROGRAM": {
+    "@context": {
+      "Program_name": "https://schema.metadatacenter.org/properties/3521c0a4-3cb9-4b8f-93f9-0454ae0a72b9"
+    },
+    "Program_name": {
+      "@value": "CHORDS"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/78470d47-6725-4cc9-ba34-ff5010ae60c1"
+  },
+  "PROJECT": {
+    "@context": {
+      "project_GUID": "https://schema.metadatacenter.org/properties/ae6efa9f-f645-41ce-9d57-cda2cad1d59c",
+      "ProjecCode": "https://schema.metadatacenter.org/properties/ce99dd03-752d-4d29-92f0-b703ca9bea04",
+      "project_name": "https://schema.metadatacenter.org/properties/d0113916-e0b8-4b26-822d-9ccb583f779d",
+      "project_short_name": "https://schema.metadatacenter.org/properties/b6f426f0-75ab-44f4-b080-5a2aefd07f2e",
+      "project_sponsor": "https://schema.metadatacenter.org/properties/b327cc8d-c5a5-40ee-8e44-2e1f92784cc0",
+      "project_sponsor_other": "https://schema.metadatacenter.org/properties/9d6666ca-4390-467b-8797-e91c4a7542a8",
+      "project_sponsor_type": "https://schema.metadatacenter.org/properties/0a09a32e-919b-450a-8c5e-6b5280c3327b",
+      "project_sponsor_type_other": "https://schema.metadatacenter.org/properties/f353c0d9-02b1-4086-a596-66d40b3feca5",
+      "project_url": "https://schema.metadatacenter.org/properties/2585ffee-8e89-485f-b44a-e1f945028341"
+    },
+    "project_GUID": {
+      "@value": null
+    },
+    "ProjecCode": {
+      "@value": "NOMS-041225"
+    },
+    "project_name": {
+      "@value": "National Occupational Mortality Surveillance"
+    },
+    "project_short_name": {
+      "@value": "NOMS"
+    },
+    "project_sponsor": [
+      {
+        "@value": "Centers for Disease Control and Prevention (CDC)"
+      },
+      {
+        "@value": "Other"
+      }
+    ],
+    "project_sponsor_other": [
+      {
+        "@value": "National Institute for Occupational Safety and Health (NIOSH)"
+      }
+    ],
+    "project_sponsor_type": [
+      {
+        "@value": "Federal Agency"
+      }
+    ],
+    "project_sponsor_type_other": [
+      {
+        "@value": null
+      }
+    ],
+    "project_url": {
+      "@id": "https://www.cdc.gov/niosh/surveillance/noms/?CDC_AAref_Val=https://www.cdc.gov/niosh/topics/noms/default.html"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/e978e294-686f-4d9f-9160-5188b327ef7d"
+  },
+  "RESOURCE": {
+    "@context": {
+      "resource_GUID": "https://schema.metadatacenter.org/properties/395d7b78-7df4-4f87-bf2d-ed737ea0a163",
+      "resource_name": "https://schema.metadatacenter.org/properties/30180920-c9cd-4184-b862-517fbf0a6448",
+      "resource_type": "https://schema.metadatacenter.org/properties/0e9d47cb-5830-4c66-a712-8a4679532ddf",
+      "domain": "https://schema.metadatacenter.org/properties/a66fa3f7-0e4c-4dd2-95ea-8911edf7bf6f",
+      "domain_other": "https://schema.metadatacenter.org/properties/7e0e76ec-eebe-470a-8bdf-ec6d446b33d0",
+      "access_type": "https://schema.metadatacenter.org/properties/a9f58a11-091e-455d-85f7-b4a02a66c8dc",
+      "date_added": "https://schema.metadatacenter.org/properties/22e082a7-a677-4f22-be11-f1e524144f37",
+      "Date_updated": "https://schema.metadatacenter.org/properties/474948e3-03f7-4168-ad0d-7f6a5d8fa326",
+      "date_verified": "https://schema.metadatacenter.org/properties/115921e3-9860-42da-8cd1-7808f8eeebdc",
+      "Publication": "https://schema.metadatacenter.org/properties/c6dbe16e-b7a8-4d36-8e58-d2833487cb76",
+      "resource_short_name": "https://schema.metadatacenter.org/properties/20738dc0-8d33-4061-b1de-d4ebc3406df0",
+      "keywords": "https://schema.metadatacenter.org/properties/5d6e8c97-9baf-4e55-b972-f21bcf0f1e1f",
+      "resource_url": "https://schema.metadatacenter.org/properties/0dbb1ce4-3762-43df-b510-85e569b9c13a",
+      "resource_description": "https://schema.metadatacenter.org/properties/1738ec04-e63d-4c24-b418-466bd3c35a21",
+      "payment_required": "https://schema.metadatacenter.org/properties/4dfcf4d7-57cd-4af0-8146-0e30e2300e2e",
+      "is_static": "https://schema.metadatacenter.org/properties/1fc3039a-b4e6-4c0a-82e0-839a8ce204d4",
+      "Resource Reference_150": "https://schema.metadatacenter.org/properties/40d516a3-c2e7-48c9-a47a-1d86962656f0",
+      "Resource Use Agreement_150": "https://schema.metadatacenter.org/properties/de892817-974c-4e6e-9cf8-c82d5c53d71a",
+      "resource_version": "https://schema.metadatacenter.org/properties/ff394466-be17-43d0-8a96-0734a14c9fa2"
+    },
+    "resource_GUID": {
+      "@value": null
+    },
+    "resource_name": {
+      "@value": "National Occupational Mortality Surveillance"
+    },
+    "resource_type": {
+      "@value": "Data Resource"
+    },
+    "domain": [
+      {
+        "@value": "Other"
+      }
+    ],
+    "domain_other": [
+      {
+        "@value": "Public Records"
+      }
+    ],
+    "access_type": [
+      {
+        "@value": "Open"
+      }
+    ],
+    "date_added": {
+      "@value": null
+    },
+    "Date_updated": {
+      "@value": null
+    },
+    "date_verified": {
+      "@value": null
+    },
+    "Publication": {
+      "@context": {
+        "publication_link": "https://schema.metadatacenter.org/properties/fbdce454-376d-47d8-92d0-dd76b9ec9f4e",
+        "publication_citation": "https://schema.metadatacenter.org/properties/ab995a4e-a162-4820-936f-7a5dfcba3cdb"
+      },
+      "publication_link": [
+        {
+          "@id": "https://www2a.cdc.gov/nioshtic-2/BuildQyr.asp?s1=%27National+Occupational+Mortality+Surveillance%27+or+NOMS&f1=*&t1=2&s2=20045639&f2=NN&t2=0&s3=&f3=TI&terms=3&Adv=1&n=new&View=b&Startyear=&EndYear=&whichdate=DP&D1=10&Limit=500&Sort=DP+DESC&ct=&B1=Search"
+        }
+      ],
+      "publication_citation": [
+        {
+          "@value": null
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/4bf6e236-82e7-4ce6-b41b-c16aec87c81c"
+    },
+    "resource_short_name": {
+      "@value": "NOMS"
+    },
+    "keywords": [
+      {
+        "@value": "Work Related Mortality"
+      },
+      {
+        "@value": "Work Related Health Disorder"
+      },
+      {
+        "@value": "Occupation Linked Suicide Rates"
+      },
+      {
+        "@value": "Occupation Linked Lung Disease"
+      }
+    ],
+    "resource_url": {
+      "@id": "https://www.cdc.gov/niosh/surveillance/noms/?CDC_AAref_Val=https://www.cdc.gov/niosh/topics/noms/default.html"
+    },
+    "resource_description": {
+      "@value": "The National Occupational Mortality Surveillance (NOMS) program is coordinated by the CDC, National Institute for Occupational Safety and Health (NIOSH). NOMS is a surveillance system that monitors and analyzes mortality data by occupation and industry code included on death certificates to identify work-related causes of death. This helps detect patterns that may be indicative of health risks associated with certain jobs. NOMS has helped reveal: 1) High rates of mesothelioma in construction and shipyard workers (linked to asbestos exposure); 2) Increased suicide rates in certain occupations (like farming and construction); and 3) Patterns of lung disease among coal miners and other industrial workers. Data are also accessible from the National Vital Statistics System."
+    },
+    "payment_required": {
+      "@value": "False"
+    },
+    "is_static": {
+      "@value": "False"
+    },
+    "Resource Reference_150": {
+      "@context": {
+        "resource_reference": "https://schema.metadatacenter.org/properties/708239b8-c6d7-4100-947e-27389304d5fc",
+        "resource_reference_link": "https://schema.metadatacenter.org/properties/1803de62-237c-4d4a-9df7-ba81c0f59326"
+      },
+      "resource_reference": {
+        "@value": "NIOSH (2024). National Occupational Mortality Surveillance (NOMS). U.S. Department of Health and Human Services, Public Health Service, Centers for Disease Control and Prevention, National Institute for Occupational Safety and Health, Division of Field Studies and Engineering, Health Informatics Branch. Date accessed._mm/dd/yyyy."
+      },
+      "resource_reference_link": {},
+      "@id": "https://repo.metadatacenter.org/template-element-instances/d4a8fdae-40ef-48c8-a000-c590f2a9a0cd"
+    },
+    "Resource Use Agreement_150": {
+      "@context": {
+        "resource_use_agreement": "https://schema.metadatacenter.org/properties/f62f7609-8ed8-44ca-9536-25d4d58d048c",
+        "resource_use_agreement_link": "https://schema.metadatacenter.org/properties/176d9215-4b01-437d-9520-84a348ff0056"
+      },
+      "resource_use_agreement": {
+        "@value": null
+      },
+      "resource_use_agreement_link": {},
+      "@id": "https://repo.metadatacenter.org/template-element-instances/0a755155-aede-44d8-bc83-0ca51d3f4761"
+    },
+    "resource_version": {
+      "@value": null
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/c581ab5b-8b52-4cc5-a333-fa73d21a8ba3"
+  },
+  "DATA RESOURCE": {
+    "@context": {
+      "source_name": "https://schema.metadatacenter.org/properties/f1410177-357b-4882-93ce-ee39187a4a32",
+      "update_frequency": "https://schema.metadatacenter.org/properties/0c0b551d-4fab-4518-ad03-a411f4bcb9b6",
+      "includes_citizen_collected": "https://schema.metadatacenter.org/properties/0b94ec22-348a-474d-a59b-befc62688a82",
+      "has_api": "https://schema.metadatacenter.org/properties/a9a1107a-ed6f-4da8-8b02-8b31bbd1c8b2",
+      "has_visualization_tool": "https://schema.metadatacenter.org/properties/a7307f38-6919-4b21-9290-109894f8afd2",
+      "Comments": "https://schema.metadatacenter.org/properties/cc95f1c8-0abe-4702-8aed-98be3d54436c",
+      "intended_use": "https://schema.metadatacenter.org/properties/b03a83c8-2b53-4216-b3c8-7410944d7df4",
+      "update_frequency_other": "https://schema.metadatacenter.org/properties/2c2daca1-8bbc-4bda-9d4d-88233afaff87"
+    },
+    "source_name": [
+      {
+        "@value": null
+      }
+    ],
+    "update_frequency": [
+      {
+        "@value": "Other"
+      }
+    ],
+    "includes_citizen_collected": {
+      "@value": "True"
+    },
+    "has_api": {
+      "@value": "True"
+    },
+    "has_visualization_tool": {
+      "@value": "True"
+    },
+    "Comments": {
+      "@value": "1) Death certificate data only includes information on the usual or longest-held occupation and industry. 2) The usual occupation and industry or cause of death may be reported inaccurately. This may result in misclassification, which could be a source of bias. 3) Occupational exposure information is not available, aside from what can be inferred from a person's occupation or industry."
+    },
+    "intended_use": {
+      "@value": "The goal is to help identify occupations and industries where workers may be at increased risk for specific causes of death, e.g., certain cancers, respiratory diseases, or injuries, so that preventive actions can be taken."
+    },
+    "update_frequency_other": {
+      "@value": "Multi-year cycles, e.g., 1999–2010, 2012–2017"
+    },
+    "@id": "https://repo.metadatacenter.org/template-element-instances/afcd70a4-46e6-4924-9c8f-6845c30a9629"
+  },
+  "POPULATION DATA RESORCE": {
+    "@context": {
+      "exposure_media": "https://schema.metadatacenter.org/properties/a9fd67b8-85a4-4ed5-b07a-03a23322009b",
+      "measures": "https://schema.metadatacenter.org/properties/b99308be-0a39-40c3-807f-3b925c633f7c",
+      "measures_others": "https://schema.metadatacenter.org/properties/eaf613b2-c897-4dd9-a5a0-73a6aa5e8910",
+      "time_extent_start": "https://schema.metadatacenter.org/properties/2b72138b-2195-4502-932c-bbe2f11bc89d",
+      "time_extent_end": "https://schema.metadatacenter.org/properties/8f2a3af3-16d8-4e68-9b3d-730b549369a6",
+      "temporal_resolution": "https://schema.metadatacenter.org/properties/e2705dad-f810-49b4-95cd-8cd19050c1a7",
+      "spatial_resolution": "https://schema.metadatacenter.org/properties/eadae8bb-40b9-4447-b1b2-b8e45e9de255",
+      "spatial_resolution_other": "https://schema.metadatacenter.org/properties/f5be2569-fc0b-438b-ba06-dfff33f8705a",
+      "spatial_coverage": "https://schema.metadatacenter.org/properties/2dd74980-75b4-486c-ab47-c3be17283ba0",
+      "geometry_type": "https://schema.metadatacenter.org/properties/9bf84c80-80df-4b5b-91cd-4418f06a4af3",
+      "geometry_source": "https://schema.metadatacenter.org/properties/9aff30f5-1501-43df-bda2-afa2ce8c6f7a",
+      "model_methods": "https://schema.metadatacenter.org/properties/17db73fe-bf38-41ac-bcff-0f1a804696c6",
+      "population_studied": "https://schema.metadatacenter.org/properties/49fee88b-428f-42dc-b50d-685b221c32d1",
+      "population_studied_other": "https://schema.metadatacenter.org/properties/27f8c4c7-0b1d-4b40-a6e5-328ec10eb7c5",
+      "data_formats": "https://schema.metadatacenter.org/properties/7e5c1d80-93bf-4066-b20a-bd08f0d13ce7",
+      "biospecimens_type": "https://schema.metadatacenter.org/properties/f5cae487-a2cd-486a-aa75-5b2e683c3488",
+      "biospecimens": "https://schema.metadatacenter.org/properties/c55b3d27-1e96-43bf-8b16-cdace2631997",
+      "linkable_encounters": "https://schema.metadatacenter.org/properties/9ffd76de-f4b9-42a6-9a86-f744aad303ef",
+      "individual_level": "https://schema.metadatacenter.org/properties/8edacdb1-2942-418f-8548-037201560569",
+      "model_methods_other": "https://schema.metadatacenter.org/properties/67683ad4-6898-4a99-8e01-7a93ad38ca3e",
+      "time_available_comment": "https://schema.metadatacenter.org/properties/e816b770-4ad6-4e59-a5f1-8b7c0d3f6897",
+      "Data Download": "https://schema.metadatacenter.org/properties/9fb995b4-d041-4133-956f-d69ee2ce14d3",
+      "spatial_coverage_other": "https://schema.metadatacenter.org/properties/693bdca9-b393-4086-93b7-237536790ed3",
+      "temporal_resolution_other": "https://schema.metadatacenter.org/properties/72a7847b-fc05-471d-9935-7592ab44c0d1",
+      "geometry_source_other": "https://schema.metadatacenter.org/properties/ffcb6b55-ac72-43ad-b80a-cd113054a419"
+    },
+    "exposure_media": [
+      {
+        "@value": null
+      }
+    ],
+    "measures": [
+      {
+        "@value": "Death"
+      },
+      {
+        "@value": "Occupation"
+      }
+    ],
+    "measures_others": [
+      {
+        "@value": null
+      }
+    ],
+    "time_extent_start": {
+      "@value": "2020"
+    },
+    "time_extent_end": {
+      "@value": "Current"
+    },
+    "temporal_resolution": {
+      "@value": "Other"
+    },
+    "spatial_resolution": {
+      "@value": "State"
+    },
+    "spatial_resolution_other": [
+      {
+        "@value": null
+      }
+    ],
+    "spatial_coverage": [
+      {
+        "@value": "United States"
+      },
+      {
+        "@value": "Other"
+      }
+    ],
+    "geometry_type": [
+      {
+        "@value": null
+      }
+    ],
+    "geometry_source": [
+      {
+        "@value": null
+      }
+    ],
+    "model_methods": [
+      {
+        "@value": null
+      }
+    ],
+    "population_studied": [
+      {
+        "@value": "Workers"
+      }
+    ],
+    "population_studied_other": [
+      {
+        "@value": null
+      }
+    ],
+    "data_formats": [
+      {
+        "@value": "XLSX"
+      },
+      {
+        "@value": "PDF"
+      }
+    ],
+    "biospecimens_type": [
+      {
+        "@value": null
+      }
+    ],
+    "biospecimens": {
+      "@value": "False"
+    },
+    "linkable_encounters": {
+      "@value": "False"
+    },
+    "individual_level": {
+      "@value": "True"
+    },
+    "model_methods_other": [
+      {
+        "@value": null
+      }
+    ],
+    "time_available_comment": {
+      "@value": "Starting in 2020 data are available for public use."
+    },
+    "Data Download": {
+      "@context": {
+        "data_link": "https://schema.metadatacenter.org/properties/6df21615-8115-4b9e-a74d-598f98bc753f",
+        "data_location_text": "https://schema.metadatacenter.org/properties/2184be3f-99e9-455c-879d-6e73b9c6b226"
+      },
+      "data_link": [
+        {
+          "@id": "https://wwwn.cdc.gov/NIOSH-WHC/chart/noms-cod?T=O&OU=001&V=R&chk_codes=False&A=A02"
+        }
+      ],
+      "data_location_text": [
+        {
+          "@value": null
+        }
+      ],
+      "@id": "https://repo.metadatacenter.org/template-element-instances/83904d8b-7ece-48af-ac9b-49834713e247"
+    },
+    "spatial_coverage_other": [
+      {
+        "@value": "52 Vital Statistics Jurisdictions starting 2022"
+      }
+    ],
+    "temporal_resolution_other": [
+      {
+        "@value": "Multi-year cycles, e.g., 1999–2010, 2012–2017"
+      }
+    ],
+    "geometry_source_other": [
+      {
+        "@value": null
+      }
+    ],
+    "@id": "https://repo.metadatacenter.org/template-element-instances/06f60db0-2d3a-41ff-aa44-fbfebb6b5acb"
+  },
+  "schema:isBasedOn": "https://repo.metadatacenter.org/templates/7a6d9231-9c22-46d0-a3f6-642357ae1831",
+  "schema:name": "Population_Data_1.5.1_CDC_NOMS",
+  "schema:description": "",
+  "pav:createdOn": "2025-04-11T07:59:41-07:00",
+  "pav:createdBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
+  "pav:lastUpdatedOn": "2025-06-04T09:20:51-07:00",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/a76d649e-812a-4da2-8323-cb569b2346c1",
+  "@id": "https://repo.metadatacenter.org/template-instances/327e00aa-498e-4928-af30-87795cb4a1fa"
+}
