@@ -86,7 +86,7 @@ class CedarAccelSource(AccelIngestComponent):
 
         logger.info(f"synch( synch_type={synch_type}, identifier={identifier}, additional_parameters={additional_parameters} )")
 
-        if synch_type != SynchType.SOURCE:
+        if synch_type != SynchType.SOURCE.value:
             raise Exception(f"synch_type={synch_type} not supported")
 
         recurse = additional_parameters.get('RECURSE', False)
