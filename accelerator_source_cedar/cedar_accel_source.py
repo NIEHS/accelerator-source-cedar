@@ -81,7 +81,8 @@ class CedarAccelSource(AccelIngestComponent):
         no recursion is performed.
 
 
-        :return: IngestPayload (this will typically be multiple payload entries)
+        :return: List of IngestPayload. Each payload contains a single cedar document. This is structured
+        so that individual documents can be processed individually.
         """
 
         logger.info(f"synch( synch_type={synch_type}, identifier={identifier}, additional_parameters={additional_parameters} )")
