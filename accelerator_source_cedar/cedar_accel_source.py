@@ -99,13 +99,21 @@ class CedarAccelSource(AccelIngestComponent):
 
         payloads = []
 
+        ctr = 0
+
         for item in folder.subfolders:
+
 
             ingestPayload = IngestPayload(self.ingest_source_descriptor)
             ingestPayload.payload_inline = True
 
             if item.item_type == "folder":
                 continue
+
+            # FIXME: temp code to limit return
+            ctr += 1
+            if ctr > 4:
+                break
 
             vals = {
                 "name": item.folder_name,
