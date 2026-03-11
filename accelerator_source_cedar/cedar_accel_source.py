@@ -1,5 +1,6 @@
 import json
 import logging
+from typing import List
 
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import SynchType
@@ -70,7 +71,7 @@ class CedarAccelSource(AccelIngestComponent):
         ingestPayload.ingest_successful = True
         return ingestPayload
 
-    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> IngestPayload:
+    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> List[IngestPayload]:
         """
         Carry out a synch between a CEDAR folder (by folder id GUID) and acclerator.
         :param synch_type: Synch type
