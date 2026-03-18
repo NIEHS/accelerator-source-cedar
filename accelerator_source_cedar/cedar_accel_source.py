@@ -1,5 +1,6 @@
 import json
 import logging
+from typing import List
 
 from accelerator_core.utils.xcom_utils import XcomPropsResolver
 from accelerator_core.workflow.accel_data_models import SynchType
@@ -70,7 +71,7 @@ class CedarAccelSource(AccelIngestComponent):
         ingestPayload.ingest_successful = True
         return ingestPayload
 
-    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> IngestPayload:
+    def synch(self, synch_type:SynchType, identifier:str, additional_parameters = {}) -> List[IngestPayload]:
         """
         Carry out a synch between a CEDAR folder (by folder id GUID) and acclerator.
         :param synch_type: Synch type
@@ -81,12 +82,13 @@ class CedarAccelSource(AccelIngestComponent):
         no recursion is performed.
 
 
-        :return: IngestPayload (this will typically be multiple payload entries)
+        :return: List of IngestPayload. Each payload contains a single cedar document. This is structured
+        so that individual documents can be processed individually.
         """
 
         logger.info(f"synch( synch_type={synch_type}, identifier={identifier}, additional_parameters={additional_parameters} )")
 
-        if synch_type != SynchType.SOURCE:
+        if synch_type != SynchType.SOURCE.value:
             raise Exception(f"synch_type={synch_type} not supported")
 
         recurse = additional_parameters.get('RECURSE', False)
@@ -95,12 +97,23 @@ class CedarAccelSource(AccelIngestComponent):
         folder = cedar_access.retrieve_folder_contents(identifier)
         logger.debug(f"folder returned\n{folder}")
 
-        ingestPayload = IngestPayload(self.ingest_source_descriptor)
+        payloads = []
+
+        ctr = 0
 
         for item in folder.subfolders:
 
+
+            ingestPayload = IngestPayload(self.ingest_source_descriptor)
+            ingestPayload.payload_inline = True
+
             if item.item_type == "folder":
                 continue
+
+            # FIXME: temp code to limit return
+            ctr += 1
+            if ctr > 4:
+                break
 
             vals = {
                 "name": item.folder_name,
@@ -109,9 +122,9 @@ class CedarAccelSource(AccelIngestComponent):
             }
 
             self.report_individual(ingestPayload, item.folder_id, vals)
+            payloads.append(ingestPayload)
 
-
-        return ingestPayload
+        return payloads
 
 
 

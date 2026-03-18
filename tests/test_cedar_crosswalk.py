@@ -5,6 +5,8 @@ import unittest
 
 from accelerator_core.utils.xcom_utils import DirectXcomPropsResolver, XcomUtils
 from accelerator_core.workflow.accel_data_models import IngestSourceDescriptor, IngestPayload
+from sqlalchemy import false
+
 from accelerator_source_cedar.accel_cedar_crosswalk import CedarToAccelCrosswalk
 
 
@@ -38,7 +40,7 @@ class TestAccelCrosswalk(unittest.TestCase):
         ingest_source_descriptor.ingest_identifier = runid
         ingest_source_descriptor.submitter_name = "submitter name"
         ingest_source_descriptor.submitter_email = "submitter@email"
-        ingest_source_descriptor.schema_version = "1.0.1"
+        ingest_source_descriptor.schema_version = "1.0.2"
         ingest_payload = IngestPayload(ingest_source_descriptor)
 
         ingest_payload.payload_inline = False
@@ -98,7 +100,7 @@ class TestAccelCrosswalk(unittest.TestCase):
         ingest_source_descriptor.ingest_identifier = runid
         ingest_source_descriptor.submitter_name = "submitter name"
         ingest_source_descriptor.submitter_email = "submitter@email"
-        ingest_source_descriptor.schema_version = "1.0.1"
+        ingest_source_descriptor.schema_version = "1.0.2"
         ingest_payload = IngestPayload(ingest_source_descriptor)
 
         ingest_payload.payload_inline = True

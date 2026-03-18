@@ -35,7 +35,7 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         logger.info("parse()")
 
         """
-        Parse a spreadsheet template for a file at a given absolute path
+        Parse json in a file at a given absolute path
         :param template_absolute_path: absolute path to the template file
         :param result: PcorTemplateParseResult with the outcome
         """
@@ -204,14 +204,18 @@ class CedarResourceReader_1_5_1(CedarResourceReader):
         """
 
         resource = PcorIntermediateResourceModel()
-        resource.id = contents_json[key]["resource_guid"]["@value"]
+        try:
+            resource.id = contents_json[key]["resource_guid"]["@value"]
+            resource.resource_guid = resource.id
+        except KeyError:
+            pass
+
         resource.resource_type = contents_json[key]["resource_type"]["@value"]
         resource.name = contents_json[key]["resource_name"]["@value"]
         resource.short_name = contents_json[key]["resource_short_name"]["@value"]
 
         resource.resource_url = contents_json[key]["resource_url"]["@id"]
         resource.description = contents_json[key]["resource_description"]["@value"]
-        resource.resource_guid = contents_json[key]["resource_guid"]["@value"]
 
         for domain in contents_json[key]["domain"]:
             if domain["@value"]:

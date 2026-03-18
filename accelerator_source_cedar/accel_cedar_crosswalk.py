@@ -12,9 +12,7 @@ from accelerator_core.workflow.accel_source_ingest import (
     IngestPayload,
 )
 from accelerator_core.workflow.crosswalk import Crosswalk
-from sqlalchemy.util import inspect_getfullargspec
 
-from accelerator_dataverse.dataverse_utils.dataverse_types import Publication
 from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_1 import CedarResourceReader_1_5_1
 
 import logging
@@ -200,7 +198,7 @@ class CedarToAccelCrosswalk(Crosswalk):
         technical.original_source_identifier = ingest_result.ingest_source_descriptor.ingest_item_id
 
         rendered = build_accel_from_model(
-            version="1.0.1",
+            version="1.0.2",
             submission=submission,
             data_resource=data_resource_model,
             temporal=accel_temporal_data_model,
@@ -254,8 +252,9 @@ class CedarToAccelCrosswalk(Crosswalk):
         # spatial data
         accel_geospatial_data = AccelGeospatialDataModel()
         spatial_resolution = []
-        temp_res = OtherType(cedar_model["key_dataset"].spatial_resolution)
-        spatial_resolution.append(temp_res)
+        for item in cedar_model["key_dataset"].spatial_resolution:
+            temp_res = OtherType(item)
+            spatial_resolution.append(temp_res)
         for tempval in cedar_model["key_dataset"].spatial_resolution_other:
             temp_res = OtherType(tempval, True)
             spatial_resolution.append(temp_res)

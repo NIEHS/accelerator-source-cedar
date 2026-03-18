@@ -8,7 +8,6 @@ import time
 import requests
 
 from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
-from pcor_cedar.cedar_access import CedarFolder
 
 logging.basicConfig(
     level=logging.DEBUG,
