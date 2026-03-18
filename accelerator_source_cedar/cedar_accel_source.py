@@ -7,9 +7,6 @@ from accelerator_core.workflow.accel_data_models import SynchType
 from accelerator_core.workflow.accel_source_ingest import AccelIngestComponent, IngestSourceDescriptor, IngestPayload
 
 from accelerator_source_cedar.accel_cedar.cedar_access import CedarAccess
-from accelerator_source_cedar.accel_cedar.cedar_config import CedarConfig
-from accelerator_source_cedar.accel_cedar.process_result import ProcessResult
-
 
 CEDAR_API_KEY = "api_key"
 
@@ -125,6 +122,5 @@ class CedarAccelSource(AccelIngestComponent):
             payloads.append(ingestPayload)
 
         return payloads
-
 
 
