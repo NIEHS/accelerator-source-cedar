@@ -19,13 +19,40 @@ logger = logging.getLogger(__name__)
 base_url = "https://resource.metadatacenter.org"
 template_prefix = "https%3A%2F%2Frepo.metadatacenter.org%2Ftemplate-instances%2F"
 
+
+class CedarFolder():
+
+    def __init__(self, cedar_file_json = None, folder_name=None, folder_id=None, item_type = "folder"):
+        if cedar_file_json:
+            len_path_info = len(cedar_file_json["pathInfo"])
+            if len_path_info > 0:
+                self.folder_name = cedar_file_json["pathInfo"][len_path_info - 1]["schema:name"]
+                self.folder_id = cedar_file_json["pathInfo"][len_path_info - 1]["@id"]
+                self.item_type = "folder"
+            else:
+                raise Exception("No folder found")
+
+            len_subfolders = len(cedar_file_json["resources"])
+            self.subfolders = []
+
+            if len_subfolders > 0:
+                for subfolder in cedar_file_json["resources"]:
+                    self.subfolders.append(CedarFolder(folder_name=subfolder["schema:name"],
+                                                       folder_id=subfolder["@id"], item_type=subfolder["resourceType"]))
+        else:
+            self.folder_name = folder_name
+            self.folder_id = folder_id
+            self.item_type = item_type
+            self.subfolders = []
+
+
 class CedarAccess(object):
 
     def __init__(self, params=None):
 
         self.cedar_config = CedarConfig(params)
 
-    def retrieve_folder_contents(self, folder_id):
+    def retrieve_folder_contents(self, folder_id) -> CedarFolder:
         """
         Retrieve the contents of the folder in CEDAR
         Parameters
@@ -37,7 +64,7 @@ class CedarAccess(object):
 
         """
 
-        api_url = self.cedar_config.cedar_properties["cedar_endpoint"] + "/folders/https%3A%2F%2Frepo.metadatacenter.org%2Ffolders%2F" + folder_id +"/contents"
+        api_url = self.cedar_config.params["cedar_endpoint"] + "/folders/https%3A%2F%2Frepo.metadatacenter.org%2Ffolders%2F" + folder_id +"/contents"
         headers = {"Content-Type": "application/json", "Accept": "application/json",
                    "Authorization": self.cedar_config.build_request_headers_json()}
         r = requests.get(api_url, headers=headers)
@@ -130,28 +157,3 @@ class CedarAccess(object):
         x = re.search(re_text, text_to_extract)
         return x.group()
 
-
-class CedarFolder():
-
-    def __init__(self, cedar_file_json = None, folder_name=None, folder_id=None, item_type = "folder"):
-        if cedar_file_json:
-            len_path_info = len(cedar_file_json["pathInfo"])
-            if len_path_info > 0:
-                self.folder_name = cedar_file_json["pathInfo"][len_path_info - 1]["schema:name"]
-                self.folder_id = cedar_file_json["pathInfo"][len_path_info - 1]["@id"]
-                self.item_type = "folder"
-            else:
-                raise Exception("No folder found")
-
-            len_subfolders = len(cedar_file_json["resources"])
-            self.subfolders = []
-
-            if len_subfolders > 0:
-                for subfolder in cedar_file_json["resources"]:
-                    self.subfolders.append(CedarFolder(folder_name=subfolder["schema:name"],
-                                                       folder_id=subfolder["@id"], item_type=subfolder["resourceType"]))
-        else:
-            self.folder_name = folder_name
-            self.folder_id = folder_id
-            self.item_type = item_type
-            self.subfolders = []
