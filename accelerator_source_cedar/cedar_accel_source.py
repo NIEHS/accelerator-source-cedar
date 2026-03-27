@@ -108,9 +108,9 @@ class CedarAccelSource(AccelIngestComponent):
                 continue
 
             # FIXME: temp code to limit return
-            ctr += 1
-            if ctr > 4:
-                break
+            # ctr += 1
+            # if ctr > 4:
+            #    break
 
             vals = {
                 "name": item.folder_name,
