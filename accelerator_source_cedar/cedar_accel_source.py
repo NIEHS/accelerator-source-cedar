@@ -118,6 +118,10 @@ class CedarAccelSource(AccelIngestComponent):
                 "id": item.folder_id,
             }
 
+            if item.folder_id == "c294fcca-2f98-419f-beb1-cb124cbcbf8b":
+                logger.info("c294fcca-2f98-419f-beb1-cb124cbcbf8b was skipped")
+                continue
+
             self.report_individual(ingestPayload, item.folder_id, vals)
             payloads.append(ingestPayload)
 
