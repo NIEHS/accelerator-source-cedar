@@ -64,7 +64,11 @@ class CedarAccess(object):
 
         """
 
+<<<<<<< HEAD
         api_url = self.cedar_config.params["cedar_endpoint"] + "/folders/https%3A%2F%2Frepo.metadatacenter.org%2Ffolders%2F" + folder_id +"/contents?limit=500"
+=======
+        api_url = self.cedar_config.params["cedar_endpoint"] + "/folders/https%3A%2F%2Frepo.metadatacenter.org%2Ffolders%2F" + folder_id +"/contents"
+>>>>>>> main
         headers = {"Content-Type": "application/json", "Accept": "application/json",
                    "Authorization": self.cedar_config.build_request_headers_json()}
         r = requests.get(api_url, headers=headers)
