@@ -107,11 +107,6 @@ class CedarAccelSource(AccelIngestComponent):
             if item.item_type == "folder":
                 continue
 
-            # FIXME: temp code to limit return
-            ctr += 1
-            if ctr > 4:
-                break
-
             vals = {
                 "name": item.folder_name,
                 "item_type": item.item_type,
