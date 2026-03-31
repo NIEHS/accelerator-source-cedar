@@ -72,7 +72,7 @@ class CedarAccess(object):
         logger.info("response:%s", r_json)
         if r.status_code not in [200, 201]:
             logger.error("failed to find resource: %s" % r_json.get(["errorMessage"], "no error message"))
-            raise Exception(f"{r_json.get(['errorMessage'], 'no error message')} with status {r.status_code}")
+            raise Exception(f"{r_json.get(['message'], 'no error message')} with status {r.status_code}")
         return CedarAccess.parse_folder_listing(r_json)
 
 
