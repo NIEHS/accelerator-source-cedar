@@ -69,10 +69,10 @@ class CedarAccess(object):
                    "Authorization": self.cedar_config.build_request_headers_json()}
         r = requests.get(api_url, headers=headers)
         r_json = r.json()
-        logger.debug("r:%s", r_json)
+        logger.info("response:%s", r_json)
         if r.status_code not in [200, 201]:
-            logger.error("failed to find resource: %s" % r_json["errorMessage"])
-            raise Exception(r_json["errorMessage"])
+            logger.error("failed to find resource: %s" % r_json.get(["errorMessage"], "no error message"))
+            raise Exception(f"{r_json.get(['errorMessage'], 'no error message')} with status {r.status_code}")
         return CedarAccess.parse_folder_listing(r_json)
 
 
