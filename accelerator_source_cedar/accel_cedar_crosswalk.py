@@ -15,6 +15,7 @@ from accelerator_core.workflow.accel_source_ingest import (
 from accelerator_core.workflow.crosswalk import Crosswalk
 
 from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_1 import CedarResourceReader_1_5_1
+from accelerator_source_cedar.accel_cedar.cedar_resource_reader_1_5_2 import CedarResourceReader_1_5_2
 
 import logging
 logger = logging.getLogger(__name__)
@@ -55,10 +56,10 @@ class CedarToAccelCrosswalk(Crosswalk):
         :param payload: input dict
         :return: output dict
         """
-
-        cedar_reader = CedarResourceReader_1_5_1()
+        cedar_reader = self.get_cedar_reader(payload)
         cedar_model = cedar_reader.model_from_json(payload)
         logger.info("have cedar_model")
+        accel_population_data = None
 
         submission = SubmissionInfoModel()
         submission.submitter_name = ingest_result.ingest_source_descriptor.submitter_name
@@ -204,7 +205,7 @@ class CedarToAccelCrosswalk(Crosswalk):
             data_resource=data_resource_model,
             temporal=accel_temporal_data_model,
             data_usage=data_usage,
-            population=None,
+            population=accel_population_data,
             geospatial=accel_geospatial_data,
             program=program,
             project=project,
@@ -213,6 +214,12 @@ class CedarToAccelCrosswalk(Crosswalk):
         )
 
         return rendered
+
+    @staticmethod
+    def get_cedar_reader(payload: dict):
+        if CedarResourceReader_1_5_2.supports(payload):
+            return CedarResourceReader_1_5_2()
+        return CedarResourceReader_1_5_1()
 
     def process_key_dataset(self, cedar_model):
         logger.info("key dataset")
@@ -566,8 +573,8 @@ class CedarToAccelCrosswalk(Crosswalk):
             data_locations = []
             for i in range(len_loc):
                 data_location_item = AccelDataLocationModel()
-                data_location_item.value = cedar_population_data.data_location_text.data_location_text[i]
-                data_location_item.data_location_link = cedar_population_data.data_location_text.data_link[i]
+                data_location_item.value = cedar_population_data.data_location_text[i]
+                data_location_item.data_location_link = cedar_population_data.data_link[i]
                 data_locations.append(data_location_item)
 
             accel_data_resource_model.data_location = data_locations
@@ -603,5 +610,3 @@ class CedarToAccelCrosswalk(Crosswalk):
         accel_data_resource_model.key_variables = cedar_population_data.use_key_variables
 
         return accel_population_data, accel_geospatial_data, accel_temporal_data_model, accel_data_resource_model, accel_data_usage
-
-
